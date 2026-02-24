@@ -1,5 +1,5 @@
-import React from "react";
 import { motion, useTransform } from "framer-motion";
+import PropTypes from "prop-types";
 import { Plus, ArrowRight } from "lucide-react";
 import { useCart } from "../../context/CartContext";
 import { useView } from "../../context/ViewContext";
@@ -22,7 +22,6 @@ const ProductCard3D = ({ product, index, mouseX, activeIndex }) => {
       onClick={() => setSelectedProduct(product)}
     >
       <div className="w-80 h-96 rounded-2xl overflow-hidden backdrop-blur-md bg-white/10 border border-white/20 shadow-2xl">
-        {/* Product visual area with gradient overlay */}
         <div
           className="h-full p-8 flex flex-col items-center justify-center relative"
           style={{
@@ -32,17 +31,31 @@ const ProductCard3D = ({ product, index, mouseX, activeIndex }) => {
           <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
 
           <div className="relative z-10 text-white text-center">
-            <motion.div
-              className="w-32 h-32 mx-auto mb-6 rounded-full bg-white/10 backdrop-blur flex items-center justify-center"
-              animate={{ rotate: 360 }}
-              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            >
-              <div className="w-24 h-24 rounded-full bg-white/20" />
-            </motion.div>
+            {/* Shopify Product Image */}
+            {product.image ? (
+              <motion.div
+                className="w-32 h-32 mx-auto mb-6 rounded-full bg-white/10 backdrop-blur flex items-center justify-center overflow-hidden"
+                whileHover={{ scale: 1.1, rotate: 5 }}
+              >
+                <img
+                  src={product.image}
+                  alt={product.imageAlt}
+                  className="w-full h-full object-cover"
+                />
+              </motion.div>
+            ) : (
+              <motion.div
+                className="w-32 h-32 mx-auto mb-6 rounded-full bg-white/10 backdrop-blur flex items-center justify-center"
+                animate={{ rotate: 360 }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              >
+                <div className="w-24 h-24 rounded-full bg-white/20" />
+              </motion.div>
+            )}
 
             <h3 className="text-2xl font-light mb-2">{product.name}</h3>
             <p className="text-sm opacity-90 mb-4">{product.category}</p>
-            <p className="text-3xl font-light mb-6">${product.price}</p>
+            <p className="text-3xl font-light mb-6">${product.price.toFixed(2)}</p>
 
             <div className="flex items-center justify-center space-x-3">
               <motion.button
@@ -70,6 +83,21 @@ const ProductCard3D = ({ product, index, mouseX, activeIndex }) => {
       </div>
     </motion.div>
   );
+};
+
+ProductCard3D.propTypes = {
+  product: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    category: PropTypes.string,
+    color: PropTypes.string,
+    image: PropTypes.string,
+    imageAlt: PropTypes.string,
+  }).isRequired,
+  index: PropTypes.number.isRequired,
+  mouseX: PropTypes.object.isRequired,
+  activeIndex: PropTypes.number.isRequired,
 };
 
 export default ProductCard3D;

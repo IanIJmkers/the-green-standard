@@ -1,8 +1,9 @@
-import React from "react";
+
 import { X, Plus, Minus, ShoppingBag } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCart } from "../../context/CartContext";
 import Button from "../ui/Button";
+import { formatPrice } from "../../utils/formatPrice";
 
 const CartDrawer = () => {
   const {
@@ -13,6 +14,8 @@ const CartDrawer = () => {
     removeFromCart,
     cartTotal,
     clearCart,
+    goToCheckout,
+    checkoutLoading,
   } = useCart();
 
   return (
@@ -104,7 +107,7 @@ const CartDrawer = () => {
                             </button>
                           </div>
                           <span className="font-medium">
-                            ${item.price * item.quantity}
+                            {formatPrice(item.price * item.quantity, item.currencyCode)}
                           </span>
                         </div>
                       </motion.div>
@@ -118,10 +121,16 @@ const CartDrawer = () => {
                 <div className="border-t p-6">
                   <div className="flex items-center justify-between mb-4">
                     <span className="text-lg">Total</span>
-                    <span className="text-2xl font-light">${cartTotal}</span>
+                    <span className="text-2xl font-light">{formatPrice(cartTotal)}</span>
                   </div>
-                  <Button variant="primary" size="lg" className="w-full mb-2">
-                    Checkout
+                  <Button
+                    variant="primary"
+                    size="lg"
+                    className="w-full mb-2"
+                    onClick={goToCheckout}
+                    disabled={checkoutLoading}
+                  >
+                    {checkoutLoading ? "Processing..." : "Checkout"}
                   </Button>
                   <Button
                     variant="outline"

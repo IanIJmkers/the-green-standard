@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState, useEffect, useCallback } from "react";
+import { useShopifyCart } from "../hooks/useShopifyCart";
 
 const CartContext = createContext();
 
@@ -17,12 +18,13 @@ export const CartProvider = ({ children }) => {
   });
 
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const shopifyCart = useShopifyCart();
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
-  const addToCart = (product) => {
+  const addToCart = useCallback((product) => {
     setCart((prevCart) => {
       const existingItem = prevCart.find((item) => item.id === product.id);
       if (existingItem) {
@@ -34,7 +36,12 @@ export const CartProvider = ({ children }) => {
       }
       return [...prevCart, { ...product, quantity: 1 }];
     });
-  };
+
+    // Sync with Shopify cart if variant ID is available
+    if (product.variantId) {
+      shopifyCart.addToCart(product.variantId, 1);
+    }
+  }, [shopifyCart]);
 
   const removeFromCart = (productId) => {
     setCart((prevCart) => prevCart.filter((item) => item.id !== productId));
@@ -56,6 +63,24 @@ export const CartProvider = ({ children }) => {
     setCart([]);
   };
 
+  const goToCheckout = () => {
+    if (shopifyCart.checkoutUrl) {
+      shopifyCart.goToCheckout();
+    } else {
+      // Fallback: create a new Shopify cart with all items then redirect
+      const firstItem = cart.find((item) => item.variantId);
+      if (firstItem) {
+        shopifyCart.addToCart(firstItem.variantId, firstItem.quantity).then(() => {
+          setTimeout(() => {
+            if (shopifyCart.checkoutUrl) {
+              shopifyCart.goToCheckout();
+            }
+          }, 1000);
+        });
+      }
+    }
+  };
+
   const cartTotal = cart.reduce(
     (total, item) => total + item.price * item.quantity,
     0
@@ -74,6 +99,9 @@ export const CartProvider = ({ children }) => {
         cartCount,
         isCartOpen,
         setIsCartOpen,
+        goToCheckout,
+        checkoutUrl: shopifyCart.checkoutUrl,
+        checkoutLoading: shopifyCart.loading,
       }}
     >
       {children}

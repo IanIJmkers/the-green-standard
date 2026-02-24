@@ -1,4 +1,4 @@
-import React from "react";
+
 import { ShoppingBag } from "lucide-react";
 import { motion } from "framer-motion";
 import { useCart } from "../../context/CartContext";

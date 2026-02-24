@@ -1,21 +1,28 @@
-import React from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { lazy, Suspense } from "react";
+import { AnimatePresence } from "framer-motion";
 import { CartProvider } from "./context/CartContext";
 import { ViewProvider, useView } from "./context/ViewContext";
 import Header from "./components/layout/Header";
+import Footer from "./components/layout/Footer";
 import HomePage from "./components/pages/HomePage";
-import CollectionsPage from "./components/pages/CollectionsPage";
-import AboutPage from "./components/pages/AboutPage";
 import ProductModal from "./components/product/ProductModal";
 import CartDrawer from "./components/cart/CartDrawer";
+import CookieConsent from "./components/eu/CookieConsent";
 import "./App.css";
 
-const pageTransition = {
-  initial: { opacity: 0 },
-  animate: { opacity: 1 },
-  exit: { opacity: 0 },
-  transition: { duration: 0.5, ease: "easeInOut" },
-};
+// Lazy load secondary pages for better performance
+const CollectionsPage = lazy(() => import("./components/pages/CollectionsPage"));
+const AboutPage = lazy(() => import("./components/pages/AboutPage"));
+const ContactPage = lazy(() => import("./components/pages/ContactPage"));
+const PrivacyPolicyPage = lazy(() => import("./components/pages/PrivacyPolicyPage"));
+const TermsPage = lazy(() => import("./components/pages/TermsPage"));
+const ShippingReturnsPage = lazy(() => import("./components/pages/ShippingReturnsPage"));
+
+const PageLoader = () => (
+  <div className="min-h-screen pt-28 flex items-center justify-center bg-white">
+    <div className="w-12 h-12 border-4 border-green-600 border-t-transparent rounded-full animate-spin" />
+  </div>
+);
 
 const AppContent = () => {
   const { currentPage } = useView();
@@ -27,16 +34,13 @@ const AppContent = () => {
       case "about":
         return <AboutPage key="about" />;
       case "contact":
-        return (
-          <motion.div
-            {...pageTransition}
-            className="min-h-screen pt-24 flex items-center justify-center"
-          >
-            <h1 className="text-4xl font-light text-gray-900">
-              Contact Coming Soon
-            </h1>
-          </motion.div>
-        );
+        return <ContactPage key="contact" />;
+      case "privacy":
+        return <PrivacyPolicyPage key="privacy" />;
+      case "terms":
+        return <TermsPage key="terms" />;
+      case "shipping":
+        return <ShippingReturnsPage key="shipping" />;
       default:
         return <HomePage key="home" />;
     }
@@ -45,11 +49,13 @@ const AppContent = () => {
   return (
     <div className="App">
       <Header />
-
-      <AnimatePresence mode="wait">{renderPage()}</AnimatePresence>
-
+      <Suspense fallback={<PageLoader />}>
+        <AnimatePresence mode="wait">{renderPage()}</AnimatePresence>
+      </Suspense>
+      <Footer />
       <ProductModal />
       <CartDrawer />
+      <CookieConsent />
     </div>
   );
 };

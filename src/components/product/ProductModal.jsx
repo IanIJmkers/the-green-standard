@@ -1,9 +1,9 @@
-import React from "react";
 import { X, ShoppingBag, Check } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useView } from "../../context/ViewContext";
 import { useCart } from "../../context/CartContext";
 import Button from "../ui/Button";
+import { formatPrice } from "../../utils/formatPrice";
 
 const ProductModal = () => {
   const { selectedProduct, setSelectedProduct } = useView();
@@ -34,15 +34,23 @@ const ProductModal = () => {
                 className="h-64 md:h-full flex items-center justify-center p-12"
                 style={{ backgroundColor: selectedProduct.color }}
               >
-                <motion.div
-                  className="w-48 h-48 rounded-full bg-white bg-opacity-20"
-                  animate={{ rotate: 360 }}
-                  transition={{
-                    duration: 20,
-                    repeat: Infinity,
-                    ease: "linear",
-                  }}
-                />
+                {selectedProduct.image ? (
+                  <img
+                    src={selectedProduct.image}
+                    alt={selectedProduct.imageAlt}
+                    className="max-w-full max-h-full object-contain"
+                  />
+                ) : (
+                  <motion.div
+                    className="w-48 h-48 rounded-full bg-white bg-opacity-20"
+                    animate={{ rotate: 360 }}
+                    transition={{
+                      duration: 20,
+                      repeat: Infinity,
+                      ease: "linear",
+                    }}
+                  />
+                )}
               </div>
 
               {/* Product Details */}
@@ -66,7 +74,7 @@ const ProductModal = () => {
                   {selectedProduct.description}
                 </p>
 
-                {selectedProduct.features && (
+                {selectedProduct.features && selectedProduct.features.length > 0 && (
                   <div className="mb-8">
                     <h3 className="text-sm font-medium text-gray-900 mb-3">
                       Key Features
@@ -87,9 +95,11 @@ const ProductModal = () => {
 
                 <div className="flex items-center justify-between mb-8">
                   <span className="text-3xl font-light">
-                    ${selectedProduct.price}
+                    {formatPrice(selectedProduct.price, selectedProduct.currencyCode)}
                   </span>
-                  <span className="text-sm text-green-600">In Stock</span>
+                  <span className={`text-sm ${selectedProduct.inStock ? 'text-green-600' : 'text-red-600'}`}>
+                    {selectedProduct.inStock ? 'In Stock' : 'Out of Stock'}
+                  </span>
                 </div>
 
                 <Button
@@ -100,9 +110,10 @@ const ProductModal = () => {
                     addToCart(selectedProduct);
                     setSelectedProduct(null);
                   }}
+                  disabled={!selectedProduct.inStock}
                 >
                   <ShoppingBag size={20} />
-                  <span>Add to Bag</span>
+                  <span>{selectedProduct.inStock ? 'Add to Bag' : 'Out of Stock'}</span>
                 </Button>
               </div>
             </div>

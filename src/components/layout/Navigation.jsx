@@ -1,4 +1,3 @@
-import React from "react";
 import { useView } from "../../context/ViewContext";
 
 const Navigation = ({ className = "", textClass = "" }) => {

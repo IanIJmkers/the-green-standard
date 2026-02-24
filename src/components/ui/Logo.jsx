@@ -1,4 +1,4 @@
-import React from "react";
+
 
 const Logo = () => {
   return (
@@ -8,7 +8,7 @@ const Logo = () => {
         <img
           src="/TGS-Logo.png"
           alt="The Green Standard"
-          className="h-28 w-auto object-contain"
+          className="h-20 w-auto object-contain"
         />
       </div>
     </div>

@@ -1,8 +1,9 @@
-import React from "react";
+
 import { motion } from "framer-motion";
 import { ArrowRight, Star } from "lucide-react";
 import { useCart } from "../../context/CartContext";
 import { useView } from "../../context/ViewContext";
+import { formatPrice } from "../../utils/formatPrice";
 import { products } from "../../data/products";
 import Button from "../ui/Button";
 
@@ -67,7 +68,7 @@ const FeaturedProducts = () => {
               </h3>
               <p className="text-sm text-gray-500 mb-3">{product.category}</p>
               <div className="flex items-center justify-between">
-                <span className="text-2xl font-light">${product.price}</span>
+                <span className="text-2xl font-light">{formatPrice(product.price, product.currencyCode)}</span>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}

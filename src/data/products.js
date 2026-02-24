@@ -13,6 +13,7 @@ export const products = [
       "Premium Shaft Options",
     ],
     inStock: true,
+    currencyCode: "EUR",
   },
   {
     id: 2,
@@ -24,6 +25,7 @@ export const products = [
       "Forged carbon steel irons delivering exceptional feel and precision.",
     features: ["Forged Construction", "Progressive Offset", "Premium Grips"],
     inStock: true,
+    currencyCode: "EUR",
   },
   {
     id: 3,
@@ -35,6 +37,7 @@ export const products = [
       "CNC milled face with pure roll technology for consistent putting.",
     features: ["CNC Milled", "Pure Roll Face", "Adjustable Weights"],
     inStock: true,
+    currencyCode: "EUR",
   },
   {
     id: 4,
@@ -45,6 +48,7 @@ export const products = [
     description: "Premium 4-piece construction for tour-level performance.",
     features: ["Urethane Cover", "Low Compression Core", "352 Dimple Pattern"],
     inStock: true,
+    currencyCode: "EUR",
   },
   {
     id: 5,
@@ -55,6 +59,7 @@ export const products = [
     description: "Lightweight carbon fiber legs with 14-way divider system.",
     features: ["14-Way Divider", "Waterproof Pockets", "Carbon Fiber Legs"],
     inStock: true,
+    currencyCode: "EUR",
   },
   {
     id: 6,
@@ -65,6 +70,7 @@ export const products = [
     description: "Premium cabretta leather with enhanced grip technology.",
     features: ["Cabretta Leather", "Moisture Control", "Reinforced Palm"],
     inStock: true,
+    currencyCode: "EUR",
   },
   {
     id: 7,
@@ -75,6 +81,7 @@ export const products = [
     description: "Versatile hybrid with low center of gravity for easy launch.",
     features: ["Low CG Design", "Speed Pocket", "Adjustable Hosel"],
     inStock: true,
+    currencyCode: "EUR",
   },
   {
     id: 8,
@@ -89,6 +96,7 @@ export const products = [
       "Raw Face Option",
     ],
     inStock: true,
+    currencyCode: "EUR",
   },
   {
     id: 9,
@@ -99,6 +107,7 @@ export const products = [
     description: "Slope-adjusted distances with pin-lock technology.",
     features: ["Slope Technology", "Pin Lock", "6x Magnification"],
     inStock: true,
+    currencyCode: "EUR",
   },
   {
     id: 10,
@@ -109,6 +118,7 @@ export const products = [
     description: "Biodegradable bamboo tees in multiple heights.",
     features: ["Eco-Friendly Bamboo", "Reduced Friction", "Multiple Heights"],
     inStock: true,
+    currencyCode: "EUR",
   },
   {
     id: 11,
@@ -119,6 +129,7 @@ export const products = [
     description: "Full-featured cart bag with integrated cooler pocket.",
     features: ["15-Way Divider", "Cooler Pocket", "GPS Holder"],
     inStock: true,
+    currencyCode: "EUR",
   },
   {
     id: 12,
@@ -129,5 +140,6 @@ export const products = [
     description: "Complete swing training system with alignment guides.",
     features: ["Alignment Sticks", "Swing Trainer", "Video Analysis Guide"],
     inStock: true,
+    currencyCode: "EUR",
   },
 ];

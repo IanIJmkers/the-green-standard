@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 const ViewContext = createContext();
 
@@ -11,8 +11,13 @@ export const useView = () => {
 };
 
 export const ViewProvider = ({ children }) => {
-  const [currentPage, setCurrentPage] = useState("home"); // 'home', 'collections', 'about', 'contact'
+  const [currentPage, setCurrentPage] = useState("home");
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [viewMode, setViewMode] = useState("grid"); // 'grid' or 'experience'
+
+  const toggleView = () => {
+    setViewMode((prev) => (prev === "grid" ? "experience" : "grid"));
+  };
 
   return (
     <ViewContext.Provider
@@ -21,6 +26,9 @@ export const ViewProvider = ({ children }) => {
         setCurrentPage,
         selectedProduct,
         setSelectedProduct,
+        viewMode,
+        setViewMode,
+        toggleView,
       }}
     >
       {children}
