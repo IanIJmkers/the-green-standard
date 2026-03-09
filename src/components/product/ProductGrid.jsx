@@ -1,204 +1,427 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import PropTypes from "prop-types";
-import { ShoppingBag } from "lucide-react";
+import { SlidersHorizontal, X, ChevronDown } from "lucide-react";
 import { useCart } from "../../context/CartContext";
 import { useView } from "../../context/ViewContext";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { formatPrice } from "../../utils/formatPrice";
+
+const CATEGORIES = [
+  "Drivers",
+  "Iron Sets",
+  "Putters",
+  "Wedges",
+  "Hybrids",
+  "Bags",
+  "Balls",
+  "Gloves",
+  "Accessories",
+  "Training",
+  "Tech",
+];
+
+const SORT_OPTIONS = [
+  { value: "recommended", label: "Recommended" },
+  { value: "price-low", label: "Price: Low to High" },
+  { value: "price-high", label: "Price: High to Low" },
+  { value: "newest", label: "Newest" },
+];
 
 const ProductGrid = ({ products }) => {
   const { addToCart } = useCart();
   const { setSelectedProduct } = useView();
-  const [selectedColors, setSelectedColors] = useState([]);
-  const [selectedSizes, setSelectedSizes] = useState([]);
   const [sortBy, setSortBy] = useState("recommended");
-
-  // Available sizes for filter
-  const availableSizes = ["XS", "S", "M", "L", "XL", "XXL", "28"];
-
-  const toggleColor = (color) => {
-    setSelectedColors((prev) =>
-      prev.includes(color) ? prev.filter((c) => c !== color) : [...prev, color]
-    );
-  };
-
-  const toggleSize = (size) => {
-    setSelectedSizes((prev) =>
-      prev.includes(size) ? prev.filter((s) => s !== size) : [...prev, size]
-    );
-  };
-
-  // Filter products
-  const filteredProducts = products.filter((product) => {
-    if (selectedColors.length > 0 && !selectedColors.includes(product.color)) {
-      return false;
-    }
-    return true;
+  const [showFilters, setShowFilters] = useState(false);
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [priceRange, setPriceRange] = useState("all");
+  const [availability, setAvailability] = useState("all");
+  const [expandedSections, setExpandedSections] = useState({
+    category: true,
+    price: true,
+    availability: true,
   });
 
+  const toggleSection = (section) => {
+    setExpandedSections((prev) => ({ ...prev, [section]: !prev[section] }));
+  };
+
+  const toggleCategory = (cat) => {
+    setSelectedCategories((prev) =>
+      prev.includes(cat) ? prev.filter((c) => c !== cat) : [...prev, cat]
+    );
+  };
+
+  const activeFilterCount =
+    selectedCategories.length +
+    (priceRange !== "all" ? 1 : 0) +
+    (availability !== "all" ? 1 : 0);
+
+  const clearFilters = () => {
+    setSelectedCategories([]);
+    setPriceRange("all");
+    setAvailability("all");
+  };
+
+  const filteredProducts = useMemo(() => {
+    let result = [...products];
+
+    if (selectedCategories.length > 0) {
+      result = result.filter((p) => selectedCategories.includes(p.category));
+    }
+
+    if (priceRange !== "all") {
+      const ranges = {
+        "under-50": [0, 50],
+        "50-100": [50, 100],
+        "100-250": [100, 250],
+        "250-500": [250, 500],
+        "over-500": [500, Infinity],
+      };
+      const [min, max] = ranges[priceRange];
+      result = result.filter((p) => p.price >= min && p.price < max);
+    }
+
+    if (availability === "in-stock") {
+      result = result.filter((p) => p.inStock !== false);
+    }
+
+    if (sortBy === "price-low") result.sort((a, b) => a.price - b.price);
+    if (sortBy === "price-high") result.sort((a, b) => b.price - a.price);
+
+    return result;
+  }, [products, selectedCategories, priceRange, availability, sortBy]);
+
   return (
-    <div className="flex gap-8">
-      {/* Sidebar Filters */}
-      <div className="w-64 flex-shrink-0">
-        {/* Color Filter */}
-        <div className="mb-8">
-          <button className="flex items-center justify-between w-full mb-4 text-left">
-            <span className="font-medium text-gray-900">Color</span>
-            <span className="text-gray-400">^</span>
-          </button>
-          <div className="grid grid-cols-4 gap-2">
-            {/* Color swatches - you can customize these */}
-            {[
-              { name: "white", bg: "#FFFFFF", border: true },
-              { name: "black", bg: "#000000" },
-              { name: "blue", bg: "#5B7C99" },
-              { name: "burgundy", bg: "#6B1E3C" },
-              { name: "beige", bg: "#C4B5A0" },
-              { name: "cream", bg: "#F5F5DC" },
-              { name: "yellow", bg: "#FFD700" },
-              { name: "olive", bg: "#6B7456" },
-              { name: "sage", bg: "#87A96B" },
-              { name: "light-gray", bg: "#D3D3D3" },
-              { name: "gold", bg: "#DAA520" },
-              { name: "tan", bg: "#D2B48C" },
-              { name: "gray", bg: "#808080" },
-              { name: "silver", bg: "#C0C0C0" },
-              { name: "charcoal", bg: "#36454F" },
-              { name: "ivory", bg: "#FFFFF0" },
-            ].map((color) => (
-              <button
-                key={color.name}
-                onClick={() => toggleColor(color.name)}
-                className={`w-10 h-10 rounded-full transition-all ${
-                  selectedColors.includes(color.name)
-                    ? "ring-2 ring-green-600 ring-offset-2"
-                    : "hover:ring-2 hover:ring-gray-300 hover:ring-offset-2"
-                } ${color.border ? "border border-gray-300" : ""}`}
-                style={{ backgroundColor: color.bg }}
-              />
-            ))}
-          </div>
+    <div>
+      {/* Header Bar */}
+      <div className="flex items-center justify-between mb-8">
+        <div>
+          <h1 className="text-2xl font-normal text-gray-900">All Products</h1>
+          <p className="text-sm text-gray-500 mt-1">
+            {filteredProducts.length} product
+            {filteredProducts.length !== 1 ? "s" : ""}
+          </p>
         </div>
-
-        {/* Size Filter */}
-        <div className="mb-8">
-          <button className="flex items-center justify-between w-full mb-4 text-left">
-            <span className="font-medium text-gray-900">Size</span>
-            <span className="text-gray-400">^</span>
-          </button>
-          <div className="space-y-2">
-            {availableSizes.map((size) => (
-              <label key={size} className="flex items-center cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={selectedSizes.includes(size)}
-                  onChange={() => toggleSize(size)}
-                  className="w-4 h-4 text-green-600 border-gray-300 rounded focus:ring-green-500"
-                />
-                <span className="ml-2 text-gray-700">{size}</span>
-              </label>
-            ))}
-          </div>
-        </div>
-
-        {/* CTA Banner */}
-        <div className="bg-black text-white p-6 rounded-lg">
-          <h3 className="font-medium mb-2">CLICK HERE FOR YOUR OFFER</h3>
-          <p className="text-sm text-gray-300">Special deals waiting for you</p>
-        </div>
-      </div>
-
-      {/* Main Content */}
-      <div className="flex-1">
-        {/* Header */}
-        <div className="flex items-center justify-between mb-6">
-          <h1 className="text-2xl font-light text-gray-900">All Products</h1>
-          <div className="flex items-center gap-2">
-            <span className="text-sm text-gray-600">Sort by</span>
+        <div className="flex items-center gap-4">
+          <div className="hidden sm:flex items-center gap-2">
+            <span className="text-xs text-gray-500 uppercase tracking-wider">
+              Sort by
+            </span>
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="border-none bg-transparent text-sm focus:outline-none cursor-pointer"
+              className="border-none bg-transparent text-xs uppercase tracking-wider focus:outline-none cursor-pointer text-gray-900"
             >
-              <option value="recommended">Recommended</option>
-              <option value="price-low">Price: Low to High</option>
-              <option value="price-high">Price: High to Low</option>
-              <option value="newest">Newest</option>
+              {SORT_OPTIONS.map((opt) => (
+                <option key={opt.value} value={opt.value}>
+                  {opt.label}
+                </option>
+              ))}
             </select>
           </div>
+          <button
+            onClick={() => setShowFilters(true)}
+            className="flex items-center gap-2 text-xs uppercase tracking-wider text-gray-900 hover:text-gray-600 transition-colors"
+          >
+            <SlidersHorizontal size={14} />
+            Filter
+            {activeFilterCount > 0 && (
+              <span className="bg-green-600 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center">
+                {activeFilterCount}
+              </span>
+            )}
+          </button>
         </div>
+      </div>
 
-        {/* Product Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProducts.map((product, index) => (
-            <motion.div
-              key={product.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: index * 0.05 }}
-              className="group cursor-pointer"
-            >
-              {/* Product Image */}
-              <div className="relative bg-gray-100 rounded-lg overflow-hidden mb-4 aspect-square">
-                {product.image ? (
-                  <img
-                    src={product.image}
-                    alt={product.imageAlt || product.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                ) : (
-                  <div
-                    className="w-full h-full flex items-center justify-center"
-                    style={{ backgroundColor: product.color || "#f3f4f6" }}
-                  >
-                    <span className="text-gray-400">No image</span>
-                  </div>
-                )}
-
-                {/* Quick Buy Button */}
-                <motion.button
-                  initial={{ opacity: 0, y: 10 }}
-                  whileHover={{ scale: 1.05 }}
-                  className="absolute top-4 right-4 bg-white px-4 py-2 rounded-md shadow-md flex items-center gap-2 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    addToCart(product);
-                  }}
-                >
-                  <ShoppingBag size={16} />
-                  QUICK BUY
-                </motion.button>
-
-                {/* View Details on Image Click */}
-                <div
-                  className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-5 transition-all"
-                  onClick={() => setSelectedProduct(product)}
+      {/* Product Grid — 4 columns like Kith */}
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-8">
+        {filteredProducts.map((product, index) => (
+          <motion.div
+            key={product.id}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3, delay: index * 0.03 }}
+            className="group cursor-pointer"
+            onClick={() => setSelectedProduct(product)}
+          >
+            {/* Product Image */}
+            <div className="relative bg-[#f0f0f0] overflow-hidden mb-3 aspect-square">
+              {product.image ? (
+                <img
+                  src={product.image}
+                  alt={product.imageAlt || product.name}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
+              ) : (
+                <div
+                  className="w-full h-full flex items-center justify-center"
+                  style={{ backgroundColor: product.color || "#f0f0f0" }}
+                >
+                  <span className="text-gray-400 text-sm">No image</span>
+                </div>
+              )}
+
+              {/* Stock Badge */}
+              {product.inStock === false && (
+                <span className="absolute bottom-3 left-3 bg-white text-[10px] uppercase tracking-wider font-medium px-2 py-1">
+                  Sold Out
+                </span>
+              )}
+
+              {/* Quick Add — appears on hover */}
+              <motion.button
+                initial={{ opacity: 0 }}
+                whileHover={{ scale: 1.02 }}
+                className="absolute bottom-0 left-0 right-0 bg-black text-white text-xs uppercase tracking-wider py-3 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  if (product.inStock !== false) addToCart(product);
+                }}
+              >
+                {product.inStock === false ? "Sold Out" : "Quick Add"}
+              </motion.button>
+            </div>
+
+            {/* Product Info */}
+            <h3 className="text-sm font-normal text-gray-900 leading-tight">
+              {product.name}
+            </h3>
+            <p className="text-sm text-gray-500 mt-0.5">
+              {formatPrice(product.price, product.currencyCode)}
+            </p>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* No Results */}
+      {filteredProducts.length === 0 && (
+        <div className="text-center py-20">
+          <p className="text-gray-500 mb-2">
+            No products found matching your filters.
+          </p>
+          <button
+            onClick={clearFilters}
+            className="text-sm text-green-600 hover:text-green-700 underline"
+          >
+            Clear all filters
+          </button>
+        </div>
+      )}
+
+      {/* Filter Side Panel Overlay */}
+      <AnimatePresence>
+        {showFilters && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/30 z-40"
+              onClick={() => setShowFilters(false)}
+            />
+
+            {/* Panel */}
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "tween", duration: 0.3 }}
+              className="fixed top-0 right-0 h-full w-full max-w-sm bg-white z-50 flex flex-col"
+            >
+              {/* Panel Header */}
+              <div className="flex items-center justify-between px-6 py-5 border-b border-gray-200">
+                <h2 className="text-sm uppercase tracking-wider font-medium">
+                  Filter
+                </h2>
+                <button
+                  onClick={() => setShowFilters(false)}
+                  className="text-gray-500 hover:text-gray-900 transition-colors"
+                >
+                  <X size={18} />
+                </button>
               </div>
 
-              {/* Product Info */}
-              <div onClick={() => setSelectedProduct(product)}>
-                <h3 className="text-base font-normal text-gray-900 mb-1">
-                  {product.name}
-                </h3>
-                <p className="text-sm text-gray-600 mb-2">{product.category}</p>
-                <p className="text-lg font-medium text-gray-900">
-                  {formatPrice(product.price, product.currencyCode)}
-                </p>
+              {/* Panel Body */}
+              <div className="flex-1 overflow-y-auto px-6 py-4">
+                {/* Sort (mobile) */}
+                <div className="sm:hidden mb-6">
+                  <button
+                    onClick={() => toggleSection("sort")}
+                    className="flex items-center justify-between w-full py-2"
+                  >
+                    <span className="text-xs uppercase tracking-wider font-medium text-gray-900">
+                      Sort By
+                    </span>
+                    <ChevronDown
+                      size={14}
+                      className={`text-gray-400 transition-transform ${expandedSections.sort ? "rotate-180" : ""}`}
+                    />
+                  </button>
+                  {expandedSections.sort && (
+                    <div className="space-y-2 mt-2">
+                      {SORT_OPTIONS.map((opt) => (
+                        <label
+                          key={opt.value}
+                          className="flex items-center cursor-pointer"
+                        >
+                          <input
+                            type="radio"
+                            name="sort"
+                            checked={sortBy === opt.value}
+                            onChange={() => setSortBy(opt.value)}
+                            className="w-3.5 h-3.5 text-green-600 border-gray-300 focus:ring-green-500"
+                          />
+                          <span className="ml-2 text-sm text-gray-700">
+                            {opt.label}
+                          </span>
+                        </label>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* Category Filter */}
+                <div className="border-t border-gray-100 pt-4 mb-6">
+                  <button
+                    onClick={() => toggleSection("category")}
+                    className="flex items-center justify-between w-full py-2"
+                  >
+                    <span className="text-xs uppercase tracking-wider font-medium text-gray-900">
+                      Category
+                    </span>
+                    <ChevronDown
+                      size={14}
+                      className={`text-gray-400 transition-transform ${expandedSections.category ? "rotate-180" : ""}`}
+                    />
+                  </button>
+                  {expandedSections.category && (
+                    <div className="space-y-2 mt-2">
+                      {CATEGORIES.map((cat) => (
+                        <label
+                          key={cat}
+                          className="flex items-center cursor-pointer"
+                        >
+                          <input
+                            type="checkbox"
+                            checked={selectedCategories.includes(cat)}
+                            onChange={() => toggleCategory(cat)}
+                            className="w-3.5 h-3.5 text-green-600 border-gray-300 rounded focus:ring-green-500"
+                          />
+                          <span className="ml-2 text-sm text-gray-700">
+                            {cat}
+                          </span>
+                        </label>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* Price Filter */}
+                <div className="border-t border-gray-100 pt-4 mb-6">
+                  <button
+                    onClick={() => toggleSection("price")}
+                    className="flex items-center justify-between w-full py-2"
+                  >
+                    <span className="text-xs uppercase tracking-wider font-medium text-gray-900">
+                      Price
+                    </span>
+                    <ChevronDown
+                      size={14}
+                      className={`text-gray-400 transition-transform ${expandedSections.price ? "rotate-180" : ""}`}
+                    />
+                  </button>
+                  {expandedSections.price && (
+                    <div className="space-y-2 mt-2">
+                      {[
+                        { value: "all", label: "All Prices" },
+                        { value: "under-50", label: "Under EUR 50" },
+                        { value: "50-100", label: "EUR 50 - EUR 100" },
+                        { value: "100-250", label: "EUR 100 - EUR 250" },
+                        { value: "250-500", label: "EUR 250 - EUR 500" },
+                        { value: "over-500", label: "Over EUR 500" },
+                      ].map((opt) => (
+                        <label
+                          key={opt.value}
+                          className="flex items-center cursor-pointer"
+                        >
+                          <input
+                            type="radio"
+                            name="price"
+                            checked={priceRange === opt.value}
+                            onChange={() => setPriceRange(opt.value)}
+                            className="w-3.5 h-3.5 text-green-600 border-gray-300 focus:ring-green-500"
+                          />
+                          <span className="ml-2 text-sm text-gray-700">
+                            {opt.label}
+                          </span>
+                        </label>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* Availability Filter */}
+                <div className="border-t border-gray-100 pt-4 mb-6">
+                  <button
+                    onClick={() => toggleSection("availability")}
+                    className="flex items-center justify-between w-full py-2"
+                  >
+                    <span className="text-xs uppercase tracking-wider font-medium text-gray-900">
+                      Availability
+                    </span>
+                    <ChevronDown
+                      size={14}
+                      className={`text-gray-400 transition-transform ${expandedSections.availability ? "rotate-180" : ""}`}
+                    />
+                  </button>
+                  {expandedSections.availability && (
+                    <div className="space-y-2 mt-2">
+                      {[
+                        { value: "all", label: "All" },
+                        { value: "in-stock", label: "In Stock" },
+                      ].map((opt) => (
+                        <label
+                          key={opt.value}
+                          className="flex items-center cursor-pointer"
+                        >
+                          <input
+                            type="radio"
+                            name="availability"
+                            checked={availability === opt.value}
+                            onChange={() => setAvailability(opt.value)}
+                            className="w-3.5 h-3.5 text-green-600 border-gray-300 focus:ring-green-500"
+                          />
+                          <span className="ml-2 text-sm text-gray-700">
+                            {opt.label}
+                          </span>
+                        </label>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Panel Footer */}
+              <div className="px-6 py-4 border-t border-gray-200 flex gap-3">
+                <button
+                  onClick={clearFilters}
+                  className="flex-1 py-3 text-xs uppercase tracking-wider border border-gray-300 text-gray-700 hover:border-gray-900 hover:text-gray-900 transition-colors"
+                >
+                  Clear All
+                </button>
+                <button
+                  onClick={() => setShowFilters(false)}
+                  className="flex-1 py-3 text-xs uppercase tracking-wider bg-gray-900 text-white hover:bg-black transition-colors"
+                >
+                  Apply ({filteredProducts.length})
+                </button>
               </div>
             </motion.div>
-          ))}
-        </div>
-
-        {/* No Results */}
-        {filteredProducts.length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-gray-500">
-              No products found matching your filters.
-            </p>
-          </div>
+          </>
         )}
-      </div>
+      </AnimatePresence>
     </div>
   );
 };

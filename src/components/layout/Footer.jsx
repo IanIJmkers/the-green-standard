@@ -18,7 +18,7 @@ const Footer = () => {
     "Customer Service": [
       { label: "Shipping & Returns", page: "shipping" },
       { label: "Order Tracking", page: "contact" },
-      { label: "FAQ", page: "contact" },
+      { label: "FAQ", page: "faq" },
     ],
     Legal: [
       { label: "Privacy Policy", page: "privacy" },

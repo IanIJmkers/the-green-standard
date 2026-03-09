@@ -17,6 +17,7 @@ const ContactPage = lazy(() => import("./components/pages/ContactPage"));
 const PrivacyPolicyPage = lazy(() => import("./components/pages/PrivacyPolicyPage"));
 const TermsPage = lazy(() => import("./components/pages/TermsPage"));
 const ShippingReturnsPage = lazy(() => import("./components/pages/ShippingReturnsPage"));
+const FAQPage = lazy(() => import("./components/pages/FAQPage"));
 
 const PageLoader = () => (
   <div className="min-h-screen pt-28 flex items-center justify-center bg-white">
@@ -41,6 +42,8 @@ const AppContent = () => {
         return <TermsPage key="terms" />;
       case "shipping":
         return <ShippingReturnsPage key="shipping" />;
+      case "faq":
+        return <FAQPage key="faq" />;
       default:
         return <HomePage key="home" />;
     }

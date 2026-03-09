@@ -1,0 +1,1839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Green Standard — Brand Strategy & Moodboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sage: #8B9D77;
+    --sage-light: #A8B89A;
+    --sage-muted: #C5D1BC;
+    --stone: #B8B0A2;
+    --stone-light: #D4CFC7;
+    --cream: #F5F2EC;
+    --warm-white: #FAF9F6;
+    --charcoal: #2C2C2C;
+    --dark: #1A1A1A;
+    --moss: #5C6B4F;
+    --sand: #D4C5A9;
+    --matcha: #9CAF88;
+    --ink: #3A3A3A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--warm-white);
+    color: var(--charcoal);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(160deg, var(--dark) 0%, #2a3325 40%, var(--moss) 100%);
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(156,175,136,0.15) 0%, transparent 70%);
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 300;
+    color: var(--cream);
+    letter-spacing: 0.08em;
+    line-height: 1.1;
+  }
+
+  .hero h1 span {
+    display: block;
+    font-style: italic;
+    font-size: 0.4em;
+    letter-spacing: 0.3em;
+    color: var(--sage-light);
+    margin-top: 0.5rem;
+    font-weight: 300;
+  }
+
+  .hero-tagline {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.25em;
+    color: var(--stone-light);
+    margin-top: 3rem;
+    font-weight: 300;
+    text-transform: uppercase;
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 3rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: var(--sage-muted);
+    text-transform: uppercase;
+    opacity: 0.5;
+  }
+
+  /* ─── SECTIONS ─── */
+  section {
+    padding: 6rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 300;
+    color: var(--dark);
+    margin-bottom: 2rem;
+    line-height: 1.2;
+  }
+
+  h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--dark);
+    margin-bottom: 1rem;
+  }
+
+  p { margin-bottom: 1.2rem; font-size: 0.95rem; }
+
+  /* ─── DIVIDER ─── */
+  .divider {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--sage-muted), transparent);
+  }
+
+  /* ─── CULTURE STATEMENT ─── */
+  .culture {
+    background: var(--cream);
+    padding: 8rem 2rem;
+    text-align: center;
+  }
+
+  .culture-inner {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .culture blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--dark);
+    line-height: 1.6;
+    margin: 3rem 0;
+    padding: 0 2rem;
+  }
+
+  .culture-manifesto {
+    text-align: left;
+    max-width: 650px;
+    margin: 3rem auto 0;
+    font-size: 0.95rem;
+    color: var(--ink);
+    line-height: 1.9;
+  }
+
+  .culture-values {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-top: 4rem;
+    text-align: center;
+  }
+
+  .value-item {
+    padding: 2rem 1.5rem;
+  }
+
+  .value-item h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--charcoal);
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+
+  .value-item p {
+    font-size: 0.85rem;
+    color: var(--ink);
+    line-height: 1.7;
+  }
+
+  /* ─── MOODBOARD ─── */
+  .moodboard-section {
+    background: var(--dark);
+    padding: 6rem 2rem;
+  }
+
+  .moodboard-section .section-label {
+    color: var(--sage-light);
+  }
+
+  .moodboard-section h2 {
+    color: var(--cream);
+  }
+
+  .moodboard-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: auto;
+    gap: 1rem;
+    max-width: 1200px;
+    margin: 3rem auto 0;
+  }
+
+  .mood-tile {
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.5rem;
+  }
+
+  .mood-tile.color {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .mood-tile .tile-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    font-weight: 400;
+  }
+
+  .mood-tile .tile-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    color: white;
+    font-weight: 300;
+    margin-top: 0.3rem;
+  }
+
+  /* Grid placement */
+  .m1 { grid-column: 1 / 5; grid-row: 1; background: var(--sage); min-height: 280px; }
+  .m2 { grid-column: 5 / 9; grid-row: 1; background: var(--stone); min-height: 280px; }
+  .m3 { grid-column: 9 / 13; grid-row: 1; background: var(--moss); min-height: 280px; }
+  .m4 { grid-column: 1 / 4; grid-row: 2; background: #E8E3DA; min-height: 200px; }
+  .m5 { grid-column: 4 / 7; grid-row: 2; background: var(--sand); min-height: 200px; }
+  .m6 { grid-column: 7 / 10; grid-row: 2; background: #7A8B6E; min-height: 200px; }
+  .m7 { grid-column: 10 / 13; grid-row: 2; background: #3D3D3D; min-height: 200px; }
+  .m8 { grid-column: 1 / 7; grid-row: 3; background: linear-gradient(135deg, var(--sage) 0%, var(--moss) 100%); min-height: 180px; }
+  .m9 { grid-column: 7 / 13; grid-row: 3; background: linear-gradient(135deg, var(--stone) 0%, #A09888 100%); min-height: 180px; }
+
+  .m4 .tile-label, .m4 .tile-text,
+  .m5 .tile-label, .m5 .tile-text {
+    color: var(--dark);
+  }
+  .m4 .tile-label, .m5 .tile-label { color: rgba(0,0,0,0.5); }
+
+  /* ─── COLOR PALETTE ─── */
+  .palette {
+    display: flex;
+    gap: 0;
+    max-width: 1200px;
+    margin: 4rem auto 0;
+    border-radius: 8px;
+    overflow: hidden;
+    height: 120px;
+  }
+
+  .palette-swatch {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1rem;
+  }
+
+  .palette-swatch span {
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.8;
+  }
+
+  .palette-swatch.light span { color: var(--dark); }
+  .palette-swatch.dark span { color: var(--cream); }
+
+  /* ─── TYPOGRAPHY SHOWCASE ─── */
+  .type-showcase {
+    max-width: 1200px;
+    margin: 4rem auto 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+
+  .type-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 6px;
+    padding: 2.5rem;
+  }
+
+  .type-card .type-name {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--sage-light);
+    margin-bottom: 1rem;
+  }
+
+  .type-card .type-sample-serif {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1.2;
+  }
+
+  .type-card .type-sample-sans {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: var(--stone-light);
+    letter-spacing: 0.05em;
+    line-height: 1.6;
+  }
+
+  .type-card .type-use {
+    font-size: 0.75rem;
+    color: var(--stone);
+    margin-top: 1rem;
+    line-height: 1.5;
+  }
+
+  .moodboard-section p {
+    color: var(--stone-light);
+  }
+
+  /* ─── PRODUCT CARDS ─── */
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .product-card {
+    background: white;
+    border: 1px solid rgba(0,0,0,0.06);
+    border-radius: 6px;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+  }
+
+  .product-card:hover {
+    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+  }
+
+  .product-header {
+    background: var(--cream);
+    padding: 2rem;
+    text-align: center;
+    min-height: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .product-header .product-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .product-header h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin-bottom: 0.3rem;
+  }
+
+  .product-header .product-subtitle {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sage);
+  }
+
+  .product-body {
+    padding: 1.5rem 2rem 2rem;
+  }
+
+  .price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+  }
+
+  .price-row:last-child { border-bottom: none; }
+
+  .price-label {
+    font-size: 0.78rem;
+    color: var(--ink);
+    font-weight: 400;
+  }
+
+  .price-value {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--dark);
+  }
+
+  .price-value.cost { color: var(--sage); }
+  .price-value.retail { color: var(--dark); font-weight: 600; font-size: 1rem; }
+  .price-value.margin { color: var(--moss); font-weight: 600; }
+
+  .product-tag {
+    display: inline-block;
+    background: var(--cream);
+    color: var(--moss);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.8rem;
+    border-radius: 3px;
+    margin-top: 1rem;
+    font-weight: 500;
+  }
+
+  /* ─── MARKETING STRATEGY ─── */
+  .strategy-section {
+    background: var(--cream);
+    padding: 6rem 2rem;
+  }
+
+  .strategy-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .platform-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-top: 3rem;
+  }
+
+  @media (max-width: 768px) {
+    .platform-grid { grid-template-columns: 1fr; }
+    .type-showcase { grid-template-columns: 1fr; }
+  }
+
+  .platform-card {
+    background: white;
+    border-radius: 8px;
+    padding: 2.5rem;
+    border: 1px solid rgba(0,0,0,0.05);
+  }
+
+  .platform-card h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--sage);
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+  }
+
+  .platform-card h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--dark);
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .platform-card ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .platform-card li {
+    position: relative;
+    padding-left: 1.2rem;
+    margin-bottom: 0.6rem;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+
+  .platform-card li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--sage);
+  }
+
+  /* ─── TIMELINE ─── */
+  .timeline {
+    margin-top: 4rem;
+  }
+
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 120px 2px 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .timeline-phase {
+    text-align: right;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sage);
+    font-weight: 500;
+    padding-top: 0.3rem;
+  }
+
+  .timeline-line {
+    background: var(--sage-muted);
+    position: relative;
+  }
+
+  .timeline-line::before {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: -4px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--sage);
+  }
+
+  .timeline-content h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--dark);
+    margin-bottom: 0.5rem;
+  }
+
+  .timeline-content p {
+    font-size: 0.85rem;
+    color: var(--ink);
+    line-height: 1.7;
+  }
+
+  /* ─── INVESTMENT TABLE ─── */
+  .invest-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+    font-size: 0.88rem;
+  }
+
+  .invest-table th {
+    text-align: left;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sage);
+    font-weight: 500;
+    padding: 0.8rem 1rem;
+    border-bottom: 2px solid var(--sage-muted);
+  }
+
+  .invest-table td {
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    color: var(--ink);
+  }
+
+  .invest-table tr:last-child td {
+    border-bottom: 2px solid var(--sage-muted);
+    font-weight: 600;
+    color: var(--dark);
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--dark);
+    padding: 4rem 2rem;
+    text-align: center;
+  }
+
+  footer p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--sage-light);
+    opacity: 0.6;
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.8;
+  }
+
+  footer .footer-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    letter-spacing: 0.15em;
+    color: var(--sage-muted);
+    margin-top: 2rem;
+    opacity: 0.4;
+    font-weight: 400;
+  }
+
+  /* ─── CONTENT PILLARS ─── */
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .pillar-card {
+    background: white;
+    border: 1px solid rgba(0,0,0,0.05);
+    border-radius: 6px;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .pillar-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: var(--sage-muted);
+    line-height: 1;
+  }
+
+  .pillar-card h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--dark);
+    font-weight: 500;
+    margin: 0.8rem 0 0.5rem;
+  }
+
+  .pillar-card p {
+    font-size: 0.85rem;
+    color: var(--ink);
+  }
+
+  /* ─── BUNDLE SECTION ─── */
+  .bundle-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .bundle-card {
+    background: white;
+    border: 2px solid var(--sage-muted);
+    border-radius: 8px;
+    padding: 2.5rem;
+    text-align: center;
+    position: relative;
+  }
+
+  .bundle-card.featured {
+    border-color: var(--sage);
+    box-shadow: 0 4px 20px rgba(139,157,119,0.15);
+  }
+
+  .bundle-card.featured::after {
+    content: 'BEST SELLER POTENTIAL';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--sage);
+    color: white;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    padding: 0.3rem 1rem;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+
+  .bundle-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--dark);
+  }
+
+  .bundle-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: var(--dark);
+    margin: 1rem 0;
+  }
+
+  .bundle-price span {
+    font-size: 0.9rem;
+    color: var(--stone);
+  }
+
+  .bundle-items {
+    text-align: left;
+    list-style: none;
+    padding: 0;
+    margin-top: 1rem;
+  }
+
+  .bundle-items li {
+    padding: 0.4rem 0;
+    font-size: 0.85rem;
+    color: var(--ink);
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+    padding-left: 1.2rem;
+    position: relative;
+  }
+
+  .bundle-items li::before {
+    content: '+';
+    position: absolute;
+    left: 0;
+    color: var(--sage);
+    font-weight: 500;
+  }
+
+  .bundle-margin {
+    margin-top: 1.5rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--moss);
+    font-weight: 500;
+  }
+
+  /* ─── PRINT STYLES ─── */
+  @media print {
+    * {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      color-adjust: exact !important;
+    }
+
+    body {
+      font-size: 10pt;
+      line-height: 1.5;
+    }
+
+    /* Force page breaks BEFORE major sections */
+    .hero {
+      page-break-after: always;
+      height: auto;
+      min-height: 100vh;
+    }
+
+    .culture {
+      page-break-before: always;
+      page-break-inside: avoid;
+    }
+
+    .moodboard-section {
+      page-break-before: always;
+    }
+
+    /* Pricing section */
+    section {
+      page-break-before: always;
+      padding: 3rem 2rem;
+    }
+
+    .strategy-section {
+      page-break-before: always;
+    }
+
+    /* Prevent orphaned headers */
+    h2, h3, h4 {
+      page-break-after: avoid;
+      break-after: avoid;
+    }
+
+    /* Keep cards together */
+    .product-card {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    .bundle-card {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    .platform-card {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    .pillar-card {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    .timeline-item {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    .value-item {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    /* Keep tables together */
+    .invest-table {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    table {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    /* Keep bundle grid together */
+    .bundle-grid {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    /* Keep culture values together */
+    .culture-values {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    /* Keep moodboard grid together */
+    .moodboard-grid {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    .type-showcase {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    /* Keep product grids from splitting mid-row */
+    .products-grid {
+      page-break-before: auto;
+    }
+
+    /* Keep video script sections together */
+    .platform-card[style*="border: 2px solid"] {
+      page-break-before: always;
+      page-break-inside: avoid;
+    }
+
+    /* Ensure backgrounds print */
+    .hero, .culture, .moodboard-section, .strategy-section, footer,
+    .mood-tile, .product-header, .product-tag, .bundle-card.featured::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    /* Remove hover effects for print */
+    .product-card:hover {
+      box-shadow: none;
+    }
+
+    /* Hide scroll indicator */
+    .hero-scroll {
+      display: none;
+    }
+
+    /* Footer on its own */
+    footer {
+      page-break-before: always;
+    }
+
+    /* Tighten spacing for print */
+    .culture {
+      padding: 4rem 2rem;
+    }
+
+    .pillars-grid {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    /* Platform grid — allow break between the two cards but not inside them */
+    .platform-grid {
+      page-break-before: auto;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════ HERO ═══════════════════════ -->
+<div class="hero">
+  <h1>
+    THE GREEN<br>STANDARD
+    <span>where peace meets the fairway</span>
+  </h1>
+  <div class="hero-tagline">Brand Strategy &bull; Moodboard &bull; Pricing &bull; Marketing</div>
+  <div class="hero-scroll">Scroll to explore</div>
+</div>
+
+<!-- ═══════════════════════ CULTURE STATEMENT ═══════════════════════ -->
+<div class="culture">
+  <div class="culture-inner">
+    <div class="section-label">01 &mdash; Brand Culture</div>
+    <h2>What We Stand For</h2>
+
+    <blockquote>
+      &ldquo;Golf was never meant to be exclusive. It was meant to be a walk in nature with intention. The Green Standard exists for those who believe the fairway is a place for everyone &mdash; a space to breathe, connect, and carry yourself with quiet confidence.&rdquo;
+    </blockquote>
+
+    <div class="culture-manifesto">
+      <p>We are not a golf brand. We are a culture.</p>
+      <p>The Green Standard was born from a simple truth: the best moments on a course have nothing to do with your handicap. They're in the morning mist on the first tee. The silence before a putt. The walk between holes with someone you haven't seen in months. The drive home with the windows down.</p>
+      <p>We believe golf is a form of meditation disguised as a sport. It teaches you patience. Presence. The beauty of showing up, even when your game doesn't. We're here for the weekend warriors. The ones who play 9 after work just to decompress. The friend groups who book a tee time instead of a bar table. The people who never grew up with golf but felt something pull them toward the green.</p>
+      <p>Our products don't scream. They speak quietly. Vintage textures meet modern restraint. Every piece carries a sense of history while belonging completely to now. Clean lines. Muted earth tones. Materials that age with character.</p>
+      <p>This is golf for the culture. Accessible, peaceful, and always with standard.</p>
+    </div>
+
+    <div class="culture-values">
+      <div class="value-item">
+          <h4>Peace</h4>
+        <p>Golf is meditation in motion. We design for the calm, not the competition.</p>
+      </div>
+      <div class="value-item">
+          <h4>Connection</h4>
+        <p>The course is where friendships deepen. We're for the walk, the conversation, the shared silence.</p>
+      </div>
+      <div class="value-item">
+          <h4>Simplicity</h4>
+        <p>Strip away the excess. What remains is clean, intentional, and timeless.</p>
+      </div>
+      <div class="value-item">
+          <h4>Standard</h4>
+        <p>Accessible doesn't mean ordinary. We hold ourselves &mdash; and our community &mdash; to a higher standard of care.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════ MOODBOARD ═══════════════════════ -->
+<div class="moodboard-section">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <div class="section-label">02 &mdash; Visual Moodboard</div>
+    <h2>The Aesthetic Language</h2>
+    <p style="max-width: 600px;">A visual system rooted in Japanese minimalism, vintage warmth, and modern restraint. Every touchpoint should feel like a quiet morning on the course.</p>
+
+    <div class="moodboard-grid">
+      <div class="mood-tile color m1">
+        <div class="tile-label">Primary</div>
+        <div class="tile-text">Sage Green</div>
+        <div style="font-size: 0.7rem; color: rgba(255,255,255,0.5); margin-top: 0.3rem;">#8B9D77</div>
+      </div>
+      <div class="mood-tile color m2">
+        <div class="tile-label">Neutral</div>
+        <div class="tile-text">Warm Stone</div>
+        <div style="font-size: 0.7rem; color: rgba(255,255,255,0.5); margin-top: 0.3rem;">#B8B0A2</div>
+      </div>
+      <div class="mood-tile color m3">
+        <div class="tile-label">Accent</div>
+        <div class="tile-text">Deep Moss</div>
+        <div style="font-size: 0.7rem; color: rgba(255,255,255,0.5); margin-top: 0.3rem;">#5C6B4F</div>
+      </div>
+      <div class="mood-tile color m4">
+        <div class="tile-label">Background</div>
+        <div class="tile-text">Raw Linen</div>
+        <div style="font-size: 0.7rem; color: rgba(0,0,0,0.3); margin-top: 0.3rem;">#E8E3DA</div>
+      </div>
+      <div class="mood-tile color m5">
+        <div class="tile-label">Warm</div>
+        <div class="tile-text">Desert Sand</div>
+        <div style="font-size: 0.7rem; color: rgba(0,0,0,0.3); margin-top: 0.3rem;">#D4C5A9</div>
+      </div>
+      <div class="mood-tile color m6">
+        <div class="tile-label">Earth</div>
+        <div class="tile-text">Fairway Dusk</div>
+        <div style="font-size: 0.7rem; color: rgba(255,255,255,0.5); margin-top: 0.3rem;">#7A8B6E</div>
+      </div>
+      <div class="mood-tile color m7">
+        <div class="tile-label">Dark</div>
+        <div class="tile-text">Quiet Carbon</div>
+        <div style="font-size: 0.7rem; color: rgba(255,255,255,0.5); margin-top: 0.3rem;">#3D3D3D</div>
+      </div>
+      <div class="mood-tile m8" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+        <div style="font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: white; font-weight: 300; font-style: italic;">
+          &ldquo;Less, but better.&rdquo;
+        </div>
+        <div style="font-size: 0.7rem; color: rgba(255,255,255,0.5); margin-top: 0.5rem; letter-spacing: 0.2em;">TEXTURE &bull; CANVAS &bull; LEATHER &bull; WAXED COTTON</div>
+      </div>
+      <div class="mood-tile m9" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+        <div style="font-size: 1.5rem; color: white; font-weight: 300; letter-spacing: 0.25em; text-transform: uppercase;">LIVED-IN</div>
+        <div style="font-size: 0.65rem; color: rgba(255,255,255,0.5); margin-top: 0.5rem; letter-spacing: 0.2em;">BEAUTY IN IMPERFECTION &bull; AGED WITH CHARACTER</div>
+        <div style="font-size: 0.8rem; color: rgba(255,255,255,0.7); margin-top: 1rem; max-width: 300px; line-height: 1.6;">
+          Aged leather. Patina. Materials that tell a story. Products that look better the more you use them.
+        </div>
+      </div>
+    </div>
+
+    <!-- Typography -->
+    <div class="type-showcase">
+      <div class="type-card">
+        <div class="type-name">Display / Headlines</div>
+        <div class="type-sample-serif">Cormorant Garamond</div>
+        <div class="type-use">Elegant, editorial serif for headlines, product names, and brand statements. Weight 300&ndash;400. Evokes heritage with modern restraint.</div>
+      </div>
+      <div class="type-card">
+        <div class="type-name">Body / UI</div>
+        <div class="type-sample-sans">Inter — Clean, readable, contemporary</div>
+        <div class="type-use">Geometric sans-serif for body copy, navigation, labels, and marketing materials. Weight 300&ndash;500. Paired with generous letter-spacing for a breathing, open feel.</div>
+      </div>
+    </div>
+
+    <!-- Visual Keywords -->
+    <div style="margin-top: 4rem; text-align: center;">
+      <div class="section-label" style="color: var(--sage-light);">Visual Keywords</div>
+      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.8rem; margin-top: 1.5rem;">
+        <span style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: var(--stone-light); padding: 0.5rem 1.2rem; border-radius: 30px; font-size: 0.78rem; letter-spacing: 0.1em;">Morning Dew</span>
+        <span style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: var(--stone-light); padding: 0.5rem 1.2rem; border-radius: 30px; font-size: 0.78rem; letter-spacing: 0.1em;">Worn Leather</span>
+        <span style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: var(--stone-light); padding: 0.5rem 1.2rem; border-radius: 30px; font-size: 0.78rem; letter-spacing: 0.1em;">Zen Garden</span>
+        <span style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: var(--stone-light); padding: 0.5rem 1.2rem; border-radius: 30px; font-size: 0.78rem; letter-spacing: 0.1em;">Quiet Confidence</span>
+        <span style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: var(--stone-light); padding: 0.5rem 1.2rem; border-radius: 30px; font-size: 0.78rem; letter-spacing: 0.1em;">Muji Meets Fairway</span>
+        <span style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: var(--stone-light); padding: 0.5rem 1.2rem; border-radius: 30px; font-size: 0.78rem; letter-spacing: 0.1em;">Vintage Patina</span>
+        <span style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: var(--stone-light); padding: 0.5rem 1.2rem; border-radius: 30px; font-size: 0.78rem; letter-spacing: 0.1em;">Waxed Canvas</span>
+        <span style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: var(--stone-light); padding: 0.5rem 1.2rem; border-radius: 30px; font-size: 0.78rem; letter-spacing: 0.1em;">Earth Tones</span>
+        <span style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: var(--stone-light); padding: 0.5rem 1.2rem; border-radius: 30px; font-size: 0.78rem; letter-spacing: 0.1em;">Smart Streetwear</span>
+        <span style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: var(--stone-light); padding: 0.5rem 1.2rem; border-radius: 30px; font-size: 0.78rem; letter-spacing: 0.1em;">Accessible Luxury</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ PRICING ═══════════════════════ -->
+<section>
+  <div class="section-label">03 &mdash; Product Pricing Strategy</div>
+  <h2>Your Product Line</h2>
+  <p style="max-width: 600px; margin-bottom: 1rem;">Pricing is positioned in the "accessible premium" sweet spot &mdash; higher than Amazon generics, lower than Stitch Golf or Vessel. The target customer sees the value in quality materials and clean design without needing a luxury price tag to feel premium.</p>
+  <p style="max-width: 600px; font-size: 0.85rem; color: var(--sage); font-weight: 400;">All costs are estimated from HIBO/Alibaba supplier pricing at 100-unit MOQ with custom branding. Shipping estimated at €7–14/unit via sea freight to UK/US.</p>
+
+  <div class="products-grid">
+
+    <!-- Product 1: Carry Bag -->
+    <div class="product-card">
+      <div class="product-header">
+        <h3>Leather Carry Bag</h3>
+        <div class="product-subtitle">Antique Leather &amp; Canvas</div>
+      </div>
+      <div class="product-body">
+        <div class="price-row">
+          <span class="price-label">Unit Cost (100 MOQ)</span>
+          <span class="price-value cost">€50</span>
+        </div>
+        <div class="price-row">
+          <span class="price-label">Shipping per unit</span>
+          <span class="price-value cost">~€14</span>
+        </div>
+        <div class="price-row">
+          <span class="price-label">Landed Cost</span>
+          <span class="price-value">€64</span>
+        </div>
+        <div class="price-row">
+          <span class="price-label">Retail Price</span>
+          <span class="price-value retail">€175</span>
+        </div>
+        <div class="price-row">
+          <span class="price-label">Gross Margin</span>
+          <span class="price-value margin">63%</span>
+        </div>
+        <div class="product-tag">Hero Product &bull; Highest AOV</div>
+      </div>
+    </div>
+
+    <!-- Product 2: Ball Pouch -->
+    <div class="product-card">
+      <div class="product-header">
+        <h3>Vintage Ball Pouch</h3>
+        <div class="product-subtitle">Microfiber &amp; Leather</div>
+      </div>
+      <div class="product-body">
+        <div class="price-row">
+          <span class="price-label">Unit Cost (100 MOQ)</span>
+          <span class="price-value cost">€7</span>
+        </div>
+        <div class="price-row">
+          <span class="price-label">Shipping per unit</span>
+          <span class="price-value cost">~€3</span>
+        </div>
+        <div class="price-row">
+          <span class="price-label">Landed Cost</span>
+          <span class="price-value">€10</span>
+        </div>
+        <div class="price-row">
+          <span class="price-label">Retail Price</span>
+          <span class="price-value retail">€35</span>
+        </div>
+        <div class="price-row">
+          <span class="price-label">Gross Margin</span>
+          <span class="price-value margin">71%</span>
+        </div>
+        <div class="product-tag">Entry-Level &bull; Impulse Buy</div>
+      </div>
+    </div>
+
+    <!-- Product 3: Shoe Bag -->
+    <div class="product-card">
+      <div class="product-header">
+        <h3>Leather Travel Shoe Bag</h3>
+        <div class="product-subtitle">Full Grain Leather</div>
+      </div>
+      <div class="product-body">
+        <div class="price-row">
+          <span class="price-label">Unit Cost (100 MOQ)</span>
+          <span class="price-value cost">€11</span>
+        </div>
+        <div class="price-row">
+          <span class="price-label">Shipping per unit</span>
+          <span class="price-value cost">~€4</span>
+        </div>
+        <div class="price-row">
+          <span class="price-label">Landed Cost</span>
+          <span class="price-value">€15</span>
+        </div>
+        <div class="price-row">
+          <span class="price-label">Retail Price</span>
+          <span class="price-value retail">€48</span>
+        </div>
+        <div class="price-row">
+          <span class="price-label">Gross Margin</span>
+          <span class="price-value margin">69%</span>
+        </div>
+        <div class="product-tag">Gift-Friendly &bull; Universal Appeal</div>
+      </div>
+    </div>
+
+    <!-- Product 4: Valuables Pouch -->
+    <div class="product-card">
+      <div class="product-header">
+        <h3>Leather Valuables Bag</h3>
+        <div class="product-subtitle">Tartan &amp; Leather</div>
+      </div>
+      <div class="product-body">
+        <div class="price-row">
+          <span class="price-label">Unit Cost (100 MOQ)</span>
+          <span class="price-value cost">€9</span>
+        </div>
+        <div class="price-row">
+          <span class="price-label">Shipping per unit</span>
+          <span class="price-value cost">~€3</span>
+        </div>
+        <div class="price-row">
+          <span class="price-label">Landed Cost</span>
+          <span class="price-value">€12</span>
+        </div>
+        <div class="price-row">
+          <span class="price-label">Retail Price</span>
+          <span class="price-value retail">€42</span>
+        </div>
+        <div class="price-row">
+          <span class="price-label">Gross Margin</span>
+          <span class="price-value margin">71%</span>
+        </div>
+        <div class="product-tag">Crossover Product &bull; On &amp; Off Course</div>
+      </div>
+    </div>
+
+    <!-- Product 5: Headcover -->
+    <div class="product-card">
+      <div class="product-header">
+        <h3>Knit Driver / Fairway Headcover</h3>
+        <div class="product-subtitle">Premium Knit</div>
+      </div>
+      <div class="product-body">
+        <div class="price-row">
+          <span class="price-label">Unit Cost (100 MOQ)</span>
+          <span class="price-value cost">€3</span>
+        </div>
+        <div class="price-row">
+          <span class="price-label">Shipping per unit</span>
+          <span class="price-value cost">~€2</span>
+        </div>
+        <div class="price-row">
+          <span class="price-label">Landed Cost</span>
+          <span class="price-value">€5</span>
+        </div>
+        <div class="price-row">
+          <span class="price-label">Retail Price</span>
+          <span class="price-value retail">€26</span>
+        </div>
+        <div class="price-row">
+          <span class="price-label">Gross Margin</span>
+          <span class="price-value margin">80%</span>
+        </div>
+        <div class="product-tag">Highest Margin &bull; Collectible</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bundles -->
+  <div style="margin-top: 5rem;">
+    <h3 style="font-size: 1.8rem;">Bundle Strategy</h3>
+    <p style="max-width: 600px;">Bundles increase AOV and give customers a reason to buy into the culture, not just a product. Each bundle has a name that reinforces the brand story.</p>
+
+    <div class="bundle-grid">
+      <div class="bundle-card">
+        <div class="bundle-name">The First Tee</div>
+        <div class="bundle-price">€54 <span>/ save €7</span></div>
+        <ul class="bundle-items">
+          <li>Vintage Ball Pouch</li>
+          <li>Knit Driver / Fairway Headcover</li>
+        </ul>
+        <div class="bundle-margin">Entry bundle &bull; New golfer gateway</div>
+      </div>
+
+      <div class="bundle-card featured">
+        <div class="bundle-name">The Standard Kit</div>
+        <div class="bundle-price">€109 <span>/ save €16</span></div>
+        <ul class="bundle-items">
+          <li>Leather Valuables Bag</li>
+          <li>Leather Travel Shoe Bag</li>
+          <li>Knit Driver / Fairway Headcover</li>
+        </ul>
+        <div class="bundle-margin">Core bundle &bull; Best value perception</div>
+      </div>
+
+      <div class="bundle-card">
+        <div class="bundle-name">The Full Round</div>
+        <div class="bundle-price">€275 <span>/ save €50</span></div>
+        <ul class="bundle-items">
+          <li>Leather Carry Bag</li>
+          <li>Leather Valuables Bag</li>
+          <li>Knit Driver / Fairway Headcover</li>
+          <li>Vintage Ball Pouch</li>
+        </ul>
+        <div class="bundle-margin">Premium bundle &bull; Complete experience</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Investment Summary -->
+  <div style="margin-top: 5rem;">
+    <h3 style="font-size: 1.8rem;">Initial Investment Summary</h3>
+    <p style="max-width: 600px; margin-bottom: 0.5rem;">What it costs to get 100 units of each product produced, branded, and shipped to your fulfilment location.</p>
+
+    <table class="invest-table">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Units</th>
+          <th>Unit Cost</th>
+          <th>Shipping</th>
+          <th>Total Investment</th>
+          <th>Revenue at Retail</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Leather Carry Bag</td>
+          <td>100</td>
+          <td>€50</td>
+          <td>€1,400</td>
+          <td>€6,400</td>
+          <td>€17,500</td>
+        </tr>
+        <tr>
+          <td>Vintage Ball Pouch</td>
+          <td>100</td>
+          <td>€7</td>
+          <td>€300</td>
+          <td>€1,000</td>
+          <td>€3,500</td>
+        </tr>
+        <tr>
+          <td>Leather Travel Shoe Bag</td>
+          <td>100</td>
+          <td>€11</td>
+          <td>€400</td>
+          <td>€1,500</td>
+          <td>€4,800</td>
+        </tr>
+        <tr>
+          <td>Leather Valuables Bag</td>
+          <td>100</td>
+          <td>€9</td>
+          <td>€300</td>
+          <td>€1,200</td>
+          <td>€4,200</td>
+        </tr>
+        <tr>
+          <td>Knit Headcover</td>
+          <td>100</td>
+          <td>€3</td>
+          <td>€200</td>
+          <td>€500</td>
+          <td>€2,600</td>
+        </tr>
+        <tr>
+          <td><strong>TOTAL</strong></td>
+          <td><strong>500</strong></td>
+          <td></td>
+          <td><strong>€2,600</strong></td>
+          <td><strong>€10,600</strong></td>
+          <td><strong>€32,600</strong></td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size: 0.8rem; color: var(--sage); margin-top: 1rem;">Potential gross revenue of €32,600 on an €10,600 investment = ~3x return before marketing &amp; platform costs.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════ MARKETING STRATEGY ═══════════════════════ -->
+<div class="strategy-section">
+  <div class="strategy-inner">
+    <div class="section-label">04 &mdash; Marketing Strategy</div>
+    <h2>Selling Culture, Not Products</h2>
+    <p style="max-width: 650px;">The Green Standard doesn't market accessories. It markets a feeling. Every piece of content should make someone think: <em>"I want that life."</em> The product is the entry point into the culture.</p>
+
+    <!-- Content Pillars -->
+    <div style="margin-top: 3rem;">
+      <h3 style="font-size: 1.4rem;">Content Pillars</h3>
+    </div>
+
+    <div class="pillars-grid">
+      <div class="pillar-card">
+        <div class="pillar-number">01</div>
+        <h4>The Peaceful Game</h4>
+        <p>Cinematic, slow-paced content showing golf as meditation. Morning light, empty courses, close-ups of dew on grass. No scoreboards. No competition. Just presence.</p>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-number">02</div>
+        <h4>The Culture</h4>
+        <p>People from all walks of life &mdash; different ages, genders, backgrounds &mdash; enjoying golf their way. Weekend rounds, after-work 9s, friends connecting. Golf as social ritual.</p>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-number">03</div>
+        <h4>The Craft</h4>
+        <p>Close-up product shots. Leather textures, stitching details, the way canvas ages. Show the materials, the design intention. Let the products speak through their quality.</p>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-number">04</div>
+        <h4>The Walk</h4>
+        <p>Behind-the-scenes of building The Green Standard. Your journey, sourcing trips, design decisions, community stories. Raw, honest, invite people into the brand being built.</p>
+      </div>
+    </div>
+
+    <!-- Platform Strategies -->
+    <div class="platform-grid" style="margin-top: 4rem;">
+
+      <div class="platform-card">
+        <h3>TikTok Strategy</h3>
+        <p style="font-size: 0.88rem; color: var(--ink); line-height: 1.7;">TikTok is your discovery engine. This is where new golfers and streetwear-curious audiences find you. The algorithm favours mood and authenticity over polish.</p>
+
+        <h4>Content Types That Convert</h4>
+        <ul>
+          <li><strong>"Golf isn't what you think"</strong> series &mdash; 15-30s clips reframing golf as peaceful, accessible, and stylish. Hook: "Golf is the most underrated form of self-care." Show cinematic B-roll of morning rounds.</li>
+          <li><strong>Product reveal / unboxing</strong> &mdash; ASMR-style. Unwrapping waxed canvas, the sound of a leather zipper, placing items in the carry bag. Slow. Intentional. No voiceover needed, just ambient course sounds.</li>
+          <li><strong>"What I bring to the course"</strong> &mdash; Lay-flat styling of your products with a peaceful aesthetic. Think Japanese knolling videos. Everything placed with precision on a wooden surface or linen backdrop.</li>
+          <li><strong>"Golf for the culture"</strong> series &mdash; Real people, diverse, showing up to golf in their way. Not polished athletes &mdash; friends, couples, solo players. The anti-country-club vibe.</li>
+          <li><strong>Build-in-public</strong> &mdash; Show the journey. Picking fabrics, sampling from manufacturers, designing the brand. This builds community investment before the first sale.</li>
+        </ul>
+
+        <h4>Posting Cadence</h4>
+        <ul>
+          <li>4&ndash;5 posts per week during pre-launch (build anticipation)</li>
+          <li>Daily during launch week (first 7 days)</li>
+          <li>3&ndash;4 per week ongoing (sustainable rhythm)</li>
+        </ul>
+
+        <h4>Sound &amp; Aesthetic</h4>
+        <ul>
+          <li>Lo-fi Japanese beats, ambient nature sounds, or trending peaceful audio</li>
+          <li>Muted colour grading &mdash; slightly desaturated, warm shadows</li>
+          <li>Slow motion B-roll mixed with handheld "real" footage</li>
+          <li>Minimal text overlays in Inter or similar clean sans-serif</li>
+        </ul>
+
+        <h4>Hashtag Strategy</h4>
+        <ul>
+          <li>#GolfTok #GolfCulture #GolfStyle #WeekendGolf</li>
+          <li>#Minimalism #SlowLiving #PeacefulGame</li>
+          <li>#TheGreenStandard (branded)</li>
+          <li>#GolfIsForEveryone #SmartStreetWear</li>
+        </ul>
+      </div>
+
+      <div class="platform-card">
+        <h3>Instagram Strategy</h3>
+        <p style="font-size: 0.88rem; color: var(--ink); line-height: 1.7;">Instagram is your brand home. This is where the aesthetic lives permanently. Your grid is your storefront, your stories are your personality, and reels drive reach.</p>
+
+        <h4>Grid Aesthetic</h4>
+        <ul>
+          <li>Alternating between product shots, lifestyle/course photography, and text-based culture quotes</li>
+          <li>Muted, consistent colour palette &mdash; sage, stone, cream, charcoal</li>
+          <li>Every 3rd post should be a "culture moment" &mdash; a quote, a philosophy, a question</li>
+          <li>No busy graphics. White space is your friend. Think Aesop, Muji, or COS visual language.</li>
+        </ul>
+
+        <h4>Reels (Discovery)</h4>
+        <ul>
+          <li>Repurpose top-performing TikToks (crosspost with slight edits)</li>
+          <li><strong>"One product, one story"</strong> &mdash; 30s mini-films for each product showing it in context on the course</li>
+          <li><strong>Transition videos</strong> &mdash; streetwear outfit to course-ready in one smooth cut. Show the crossover appeal.</li>
+        </ul>
+
+        <h4>Stories (Community)</h4>
+        <ul>
+          <li>Weekly "Sunday Session" Q&amp;A about golf, the brand, or culture</li>
+          <li>Polls and "this or that" to involve the community in product decisions</li>
+          <li>Repost customer content (UGC is critical once live)</li>
+          <li>Behind-the-scenes of sampling, packaging design, photoshoots</li>
+        </ul>
+
+        <h4>Influencer Strategy</h4>
+        <ul>
+          <li><strong>Micro-influencers (5K&ndash;50K)</strong> &mdash; Golf lifestyle creators who aren't traditional "golf bros." Look for creators who blend golf with fashion, travel, or wellness.</li>
+          <li><strong>Gifting programme</strong> &mdash; Send "The Standard Kit" bundle to 20&ndash;30 creators at launch. No paid posts &mdash; just genuine product placement. This works because the products photograph beautifully.</li>
+          <li><strong>Streetwear crossover creators</strong> &mdash; Reach beyond golf. Target fashion/lifestyle creators who'd appreciate the aesthetic even without being golfers.</li>
+        </ul>
+
+        <h4>Posting Cadence</h4>
+        <ul>
+          <li>Feed: 3&ndash;4 posts per week</li>
+          <li>Stories: Daily (minimum)</li>
+          <li>Reels: 2&ndash;3 per week</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Launch Timeline -->
+    <div class="timeline" style="margin-top: 5rem;">
+      <h3 style="font-size: 1.8rem; margin-bottom: 2rem;">12-Week Launch Roadmap</h3>
+
+      <div class="timeline-item">
+        <div class="timeline-phase">Weeks 1&ndash;3</div>
+        <div class="timeline-line"></div>
+        <div class="timeline-content">
+          <h4>Foundation</h4>
+          <p>Finalise brand identity (logo, typography, colour system). Set up Instagram and TikTok accounts. Begin "build in public" content. Order samples from HIBO. Secure domain and build a simple Shopify landing page with email capture: "Something peaceful is coming."</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-phase">Weeks 4&ndash;6</div>
+        <div class="timeline-line"></div>
+        <div class="timeline-content">
+          <h4>Content Engine</h4>
+          <p>Shoot product photography with samples (flat lays, on-course, lifestyle). Create 20+ pieces of content for both platforms. Begin posting 4&ndash;5x/week on TikTok, 3x/week on Instagram. Tease products without revealing everything. Build the email list to 500+ through social and a referral incentive.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-phase">Weeks 7&ndash;8</div>
+        <div class="timeline-line"></div>
+        <div class="timeline-content">
+          <h4>Community &amp; Hype</h4>
+          <p>Launch a "Founding Members" waitlist with early access pricing. Send gifting packages to 20&ndash;30 micro-influencers. Run a countdown on stories. Drop one product teaser per day in the final week. Place your bulk order with HIBO (100 units each product).</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-phase">Weeks 9&ndash;10</div>
+        <div class="timeline-line"></div>
+        <div class="timeline-content">
+          <h4>Launch</h4>
+          <p>Open the store. Email blast to waitlist with 48-hour early access. Post daily on both platforms. Highlight The Standard Kit bundle as the "starter culture pack." Engage every comment and DM personally. Run a small TikTok Spark Ads budget (€20–25/day) on your best-performing organic content.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-phase">Weeks 11&ndash;12</div>
+        <div class="timeline-line"></div>
+        <div class="timeline-content">
+          <h4>Optimise &amp; Scale</h4>
+          <p>Analyse what sold, what content performed, and where traffic came from. Double down on top performers. Collect and reshare UGC. Plan your second drop (seasonal colourway, limited edition headcover, or the first clothing piece). Begin building the community for long-term retention.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Additional Channels -->
+    <div style="margin-top: 4rem;">
+      <h3 style="font-size: 1.4rem;">Additional Growth Channels</h3>
+      <div class="platform-grid" style="margin-top: 1.5rem;">
+        <div class="platform-card">
+          <h3>Pinterest</h3>
+          <p style="font-size: 0.88rem; color: var(--ink);">Your moodboard energy lives here. Pin product flatlays, course photography, and lifestyle imagery. Pinterest drives long-tail organic traffic to Shopify. Create boards like "Morning Round Essentials," "Vintage Golf Aesthetic," and "The Peaceful Game."</p>
+        </div>
+        <div class="platform-card">
+          <h3>Email / SMS</h3>
+          <p style="font-size: 0.88rem; color: var(--ink);">Build from day one. Use Klaviyo or Mailchimp. Welcome sequence, abandoned cart recovery, and a weekly "Sunday Standard" newsletter with course recommendations, product care tips, and culture stories. SMS for drops and restocks only &mdash; keep it rare and valuable.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════ FIRST VIDEO ═══════════════════════ -->
+<section>
+  <div class="section-label">05 &mdash; Your First Video</div>
+  <h2>The Origin Story</h2>
+  <p style="max-width: 650px;">This is the most important piece of content you'll ever make. It's not a product video. It's a culture video. It tells people who you are, why this exists, and why they should care. Raw, honest, no script teleprompter &mdash; just you talking to the camera like you're talking to a mate.</p>
+
+  <div style="margin-top: 3rem;">
+    <div class="platform-card" style="border: 2px solid var(--sage); max-width: 800px;">
+      <h3 style="color: var(--sage);">Video 1 &mdash; "Why I Started The Green Standard"</h3>
+      <p style="font-size: 0.78rem; color: var(--stone); margin-bottom: 1.5rem;">Format: 60&ndash;90 seconds &bull; Filmed handheld or on tripod &bull; On a course at golden hour or in a quiet, clean space &bull; Muted tones, natural light</p>
+
+      <h4>Opening Hook (0&ndash;3 seconds)</h4>
+      <p style="font-size: 0.9rem; color: var(--ink); font-style: italic;">"Golf has a gatekeeping problem. And I want to change that."</p>
+      <p style="font-size: 0.85rem; color: var(--ink);">Straight to camera. No intro, no logo, no music yet. Just you and the statement. This stops the scroll.</p>
+
+      <h4>The Honest Story (3&ndash;30 seconds)</h4>
+      <p style="font-size: 0.85rem; color: var(--ink);">Speak naturally. Something like:</p>
+      <p style="font-size: 0.9rem; color: var(--ink); font-style: italic; background: var(--cream); padding: 1.2rem; border-radius: 4px; line-height: 1.8;">
+        "I'm just a regular guy. I don't come from money. I didn't grow up at a country club. But when I first stepped onto a golf course, something clicked. It wasn't about the score. It was the walk. The quiet. The feeling of being completely present. And I thought &mdash; why does this feel like it's not for me? Why does golf feel like a members-only club when all it really is... is a peaceful walk with a purpose?"
+      </p>
+
+      <h4>The Mission (30&ndash;50 seconds)</h4>
+      <p style="font-size: 0.9rem; color: var(--ink); font-style: italic; background: var(--cream); padding: 1.2rem; border-radius: 4px; line-height: 1.8;">
+        "So I created The Green Standard. Not a golf brand &mdash; a culture. For people who see golf the way I do. It's not about competition. It's about connection. Weekend rounds with your mates. A 9-hole reset after a long week. Looking clean on the course without spending a fortune. Golf should be accessible. And the gear should match that energy &mdash; minimal, vintage-inspired, affordable. No elitism. Just standard."
+      </p>
+
+      <h4>The Transparency (50&ndash;70 seconds)</h4>
+      <p style="font-size: 0.9rem; color: var(--ink); font-style: italic; background: var(--cream); padding: 1.2rem; border-radius: 4px; line-height: 1.8;">
+        "I'm going to be transparent with you. I built this on my own. My funds, my time, late nights with AI tools helping me figure out what I couldn't, my close friends and family backing me up. I didn't have a blueprint for this. I just had a feeling that golf needed something different. And if you're watching this, you probably feel it too."
+      </p>
+
+      <h4>The Invite (70&ndash;90 seconds)</h4>
+      <p style="font-size: 0.9rem; color: var(--ink); font-style: italic; background: var(--cream); padding: 1.2rem; border-radius: 4px; line-height: 1.8;">
+        "So if you believe golf is for everyone &mdash; follow the journey. First drop is coming. And it's going to set the standard."
+      </p>
+
+      <h4 style="margin-top: 2rem;">Production Notes</h4>
+      <ul>
+        <li>B-roll intercuts: Close-ups of the products (leather texture, stitching, the carry bag on grass), empty fairways at sunrise, your hands holding a club, walking a course alone</li>
+        <li>Music: Lo-fi ambient &mdash; something calm and cinematic, builds slightly toward the end</li>
+        <li>Text overlay at the end: "THE GREEN STANDARD" in Cormorant Garamond, sage green on black, with your handle underneath</li>
+        <li>No hard sell. No "link in bio." The story IS the marketing. Let people find you.</li>
+        <li>Post simultaneously on TikTok (full), Instagram Reels (full), and Instagram feed (30s cut with carousel stills)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════ MARKETING TOOLS & AUTOMATION ═══════════════════════ -->
+<div class="strategy-section">
+  <div class="strategy-inner">
+    <div class="section-label">06 &mdash; Marketing Tools &amp; Automation</div>
+    <h2>Your Tech Stack</h2>
+    <p style="max-width: 650px;">You don't need a marketing team. You need the right tools and smart automation. Here's the exact stack to run The Green Standard as a one-person operation, and how to wire it all together with n8n.</p>
+
+    <!-- Tools Grid -->
+    <div style="margin-top: 3rem;">
+      <h3 style="font-size: 1.4rem;">Essential Tools</h3>
+    </div>
+
+    <div class="platform-grid" style="margin-top: 1.5rem;">
+      <div class="platform-card">
+        <h3>Content Creation</h3>
+        <h4>Canva (Free / Pro €12/mo)</h4>
+        <ul>
+          <li>All social graphics, story templates, product mockups, and brand assets</li>
+          <li>Create a brand kit with your colours (sage, stone, moss, cream), fonts (Cormorant Garamond + Inter), and logo</li>
+          <li>Use their Magic Resize to instantly adapt one design for TikTok, Instagram feed, stories, and Pinterest</li>
+        </ul>
+        <h4>CapCut (Free)</h4>
+        <ul>
+          <li>Your primary video editor for TikTok and Reels</li>
+          <li>Colour grading presets to keep that muted, warm aesthetic consistent</li>
+          <li>Text overlays, transitions, and speed ramping for product reveals</li>
+        </ul>
+        <h4>Unsplash / Pexels (Free)</h4>
+        <ul>
+          <li>Stock golf course photography for early content before you have your own photoshoots</li>
+          <li>Search: "golf course morning," "golf minimal," "fairway sunrise"</li>
+        </ul>
+      </div>
+
+      <div class="platform-card">
+        <h3>Scheduling &amp; Publishing</h3>
+        <h4>Buffer (Free &mdash; 30 posts/channel/mo)</h4>
+        <ul>
+          <li>Schedule Instagram, TikTok, and Pinterest posts in advance</li>
+          <li>Free plan covers your needs at launch (3&ndash;4 posts/week per platform)</li>
+          <li>Built-in analytics to see what's performing</li>
+          <li>Clean, minimal interface &mdash; fits your brand energy</li>
+        </ul>
+        <h4>Later (Free tier / €18/mo)</h4>
+        <ul>
+          <li>Alternative to Buffer with stronger visual planning (drag-and-drop grid preview)</li>
+          <li>Built-in UGC finder &mdash; helpful once customers start posting</li>
+          <li>Linkin.bio page to turn your Instagram into a mini shopfront</li>
+        </ul>
+        <h4>Planable (Free &mdash; 50 posts)</h4>
+        <ul>
+          <li>Best if you want a content calendar view with collaboration features</li>
+          <li>Great for planning content pillars visually across weeks</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="platform-grid" style="margin-top: 2rem;">
+      <div class="platform-card">
+        <h3>E-Commerce &amp; Email</h3>
+        <h4>Shopify (€32/mo Basic)</h4>
+        <ul>
+          <li>Your storefront. Clean theme (Dawn or Sense) &mdash; minimal, matches your aesthetic</li>
+          <li>Built-in abandoned cart recovery emails</li>
+          <li>Integrates with everything below</li>
+        </ul>
+        <h4>Klaviyo (Free up to 250 contacts)</h4>
+        <ul>
+          <li>Email marketing built for e-commerce. Syncs directly with Shopify</li>
+          <li>Automated welcome series, abandoned cart flows, post-purchase follow-ups</li>
+          <li>Segment by first-time buyer, repeat customer, bundle purchaser, etc.</li>
+        </ul>
+        <h4>Smile.io (Free up to 200 orders/mo)</h4>
+        <ul>
+          <li>Loyalty and rewards programme built into Shopify</li>
+          <li>Points for purchases, referrals, and social shares</li>
+          <li>Fits the "community" angle of the brand perfectly</li>
+        </ul>
+      </div>
+
+      <div class="platform-card">
+        <h3>Analytics &amp; Growth</h3>
+        <h4>Google Analytics 4 (Free)</h4>
+        <ul>
+          <li>Track where traffic comes from (TikTok vs Instagram vs Pinterest vs email)</li>
+          <li>See which products and bundles convert best</li>
+        </ul>
+        <h4>TikTok Business Suite (Free)</h4>
+        <ul>
+          <li>Native analytics for your TikTok content performance</li>
+          <li>TikTok Spark Ads &mdash; boost your best organic posts for €20&ndash;25/day</li>
+        </ul>
+        <h4>Meta Business Suite (Free)</h4>
+        <ul>
+          <li>Instagram and Facebook analytics, scheduling, and ad management</li>
+          <li>Audience insights to understand your community demographics</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- n8n Automation -->
+    <div style="margin-top: 5rem;">
+      <h3 style="font-size: 1.8rem;">Automating with n8n</h3>
+      <p style="max-width: 650px;">n8n is an open-source automation tool (free to self-host, or €20/mo cloud). Think of it as your invisible marketing assistant &mdash; it connects your tools and runs workflows automatically so you can focus on creating content and building community.</p>
+      <p style="max-width: 650px; font-size: 0.85rem; color: var(--sage); font-weight: 400;">You can self-host n8n for free on a €5/mo VPS (Hetzner, DigitalOcean) &mdash; or use the cloud version. Either way, these workflows will save you hours every week.</p>
+    </div>
+
+    <div class="products-grid" style="margin-top: 2rem;">
+
+      <div class="product-card">
+        <div class="product-header" style="background: var(--sage); min-height: 100px;">
+          <h3 style="color: white; margin-bottom: 0;">New Order &rarr; Thank You Flow</h3>
+          <div class="product-subtitle" style="color: rgba(255,255,255,0.7);">Shopify &rarr; Klaviyo &rarr; Slack</div>
+        </div>
+        <div class="product-body">
+          <p style="font-size: 0.85rem;">When a new Shopify order comes in, n8n triggers a personalised thank-you email via Klaviyo (not the generic Shopify one), sends you a Slack/Telegram notification with order details, and if it's a first-time buyer, adds them to a "welcome" email sequence that tells The Green Standard story over 5 days.</p>
+          <div class="product-tag">Post-Purchase Experience</div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-header" style="background: var(--moss); min-height: 100px;">
+          <h3 style="color: white; margin-bottom: 0;">Content Calendar &rarr; Auto-Post</h3>
+          <div class="product-subtitle" style="color: rgba(255,255,255,0.7);">Google Sheets &rarr; n8n &rarr; Buffer/Blotato</div>
+        </div>
+        <div class="product-body">
+          <p style="font-size: 0.85rem;">Maintain a content calendar in Google Sheets (date, caption, image URL, platform). n8n reads it daily, picks up any scheduled posts, and pushes them to Buffer or directly to social platforms via Blotato. You batch-create content on Sundays, and it posts itself all week.</p>
+          <div class="product-tag">Content Automation</div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-header" style="background: var(--stone); min-height: 100px;">
+          <h3 style="color: white; margin-bottom: 0;">Restock &amp; Low Inventory Alert</h3>
+          <div class="product-subtitle" style="color: rgba(255,255,255,0.7);">Shopify &rarr; n8n &rarr; Email/Telegram</div>
+        </div>
+        <div class="product-body">
+          <p style="font-size: 0.85rem;">n8n checks your Shopify inventory daily. When any product drops below 20 units, it sends you an alert via email and Telegram with the product name and current stock count. No more surprise stockouts. You can also trigger a "selling fast" email to your list automatically.</p>
+          <div class="product-tag">Inventory Management</div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-header" style="background: var(--dark); min-height: 100px;">
+          <h3 style="color: white; margin-bottom: 0;">UGC Collection &rarr; Reshare</h3>
+          <div class="product-subtitle" style="color: rgba(255,255,255,0.7);">Instagram API &rarr; n8n &rarr; Google Sheets &rarr; Slack</div>
+        </div>
+        <div class="product-body">
+          <p style="font-size: 0.85rem;">n8n monitors Instagram for posts tagged with #TheGreenStandard or mentioning your handle. It logs them to a Google Sheet with the image URL, username, and caption. Sends you a Slack/Telegram notification so you can quickly reshare the best UGC to stories. Community-powered content on autopilot.</p>
+          <div class="product-tag">Community &amp; UGC</div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-header" style="background: var(--sand); min-height: 100px;">
+          <h3 style="color: var(--dark); margin-bottom: 0;">Weekly Performance Digest</h3>
+          <div class="product-subtitle" style="color: var(--ink);">Shopify + GA4 + Socials &rarr; n8n &rarr; Email</div>
+        </div>
+        <div class="product-body">
+          <p style="font-size: 0.85rem;">Every Monday morning, n8n pulls your weekly revenue from Shopify, top-performing posts from Buffer/social APIs, and website traffic from GA4. It compiles a clean digest email sent to you with: total revenue, best-selling product, top content piece, and traffic sources. Your personal marketing report, automated.</p>
+          <div class="product-tag">Analytics &amp; Reporting</div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-header" style="background: linear-gradient(135deg, var(--sage), var(--moss)); min-height: 100px;">
+          <h3 style="color: white; margin-bottom: 0;">AI Content Assistant</h3>
+          <div class="product-subtitle" style="color: rgba(255,255,255,0.7);">n8n &rarr; OpenAI/Claude &rarr; Google Sheets</div>
+        </div>
+        <div class="product-body">
+          <p style="font-size: 0.85rem;">Feed n8n your brand voice guidelines and product descriptions. It uses AI to generate a week's worth of caption drafts, hashtag sets, and story prompts &mdash; all saved to your content calendar Google Sheet for you to review and tweak. You're not writing from scratch anymore; you're editing.</p>
+          <div class="product-tag">AI-Powered Content</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Monthly Cost Breakdown -->
+    <div style="margin-top: 5rem;">
+      <h3 style="font-size: 1.8rem;">Monthly Tool Costs</h3>
+      <p style="max-width: 600px;">Your full marketing operation can run for under €60/month at launch. Scale up tools as revenue grows.</p>
+
+      <table class="invest-table">
+        <thead>
+          <tr>
+            <th>Tool</th>
+            <th>Purpose</th>
+            <th>Cost</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Shopify Basic</td>
+            <td>Storefront</td>
+            <td>€32/mo</td>
+            <td>Core platform</td>
+          </tr>
+          <tr>
+            <td>Canva Free</td>
+            <td>Design</td>
+            <td>€0</td>
+            <td>Upgrade to Pro for €12/mo when needed</td>
+          </tr>
+          <tr>
+            <td>Buffer Free</td>
+            <td>Scheduling</td>
+            <td>€0</td>
+            <td>30 posts/channel covers launch phase</td>
+          </tr>
+          <tr>
+            <td>Klaviyo Free</td>
+            <td>Email marketing</td>
+            <td>€0</td>
+            <td>Free up to 250 contacts</td>
+          </tr>
+          <tr>
+            <td>CapCut</td>
+            <td>Video editing</td>
+            <td>€0</td>
+            <td>Free with pro features</td>
+          </tr>
+          <tr>
+            <td>n8n (self-hosted)</td>
+            <td>Automation</td>
+            <td>€5/mo</td>
+            <td>On a Hetzner VPS; or €20/mo cloud</td>
+          </tr>
+          <tr>
+            <td>Google Analytics</td>
+            <td>Website analytics</td>
+            <td>€0</td>
+            <td>Essential, non-negotiable</td>
+          </tr>
+          <tr>
+            <td>Smile.io Free</td>
+            <td>Loyalty programme</td>
+            <td>€0</td>
+            <td>Add once you have repeat customers</td>
+          </tr>
+          <tr>
+            <td><strong>TOTAL AT LAUNCH</strong></td>
+            <td></td>
+            <td><strong>~€37/mo</strong></td>
+            <td><strong>Everything you need to run the brand</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════ FOOTER ═══════════════════════ -->
+<footer>
+  <p>The course doesn't care about your handicap. It just asks that you show up.</p>
+  <div class="footer-brand">THE GREEN STANDARD &mdash; 2026</div>
+</footer>
+
+</body>
+</html>
