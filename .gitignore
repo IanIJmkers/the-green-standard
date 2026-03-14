@@ -13,6 +13,13 @@ database.sqlite
 .env
 .env.*
 
+# MCP config (contains API keys)
+.mcp.json
+
+# Word temp files and docs with credentials
+*.docx
+~$*
+
 
 
 
