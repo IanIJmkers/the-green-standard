@@ -1,9 +1,14 @@
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import ProductGrid from "../product/ProductGrid";
 import { useShopifyProducts } from "../../hooks/useShopifyProducts";
 
 const CollectionsPage = () => {
   const { products, loading, error } = useShopifyProducts();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
 
   if (loading) {
     return (

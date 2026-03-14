@@ -4,20 +4,24 @@ import { ArrowRight, Star } from "lucide-react";
 import { useCart } from "../../context/CartContext";
 import { useView } from "../../context/ViewContext";
 import { formatPrice } from "../../utils/formatPrice";
-import { products } from "../../data/products";
+import { useShopifyProducts } from "../../hooks/useShopifyProducts";
 import Button from "../ui/Button";
 
 const FeaturedProducts = () => {
   const { addToCart } = useCart();
   const { setSelectedProduct, setCurrentPage } = useView();
+  const { products, loading } = useShopifyProducts();
 
-  // Select featured products
+  // Select featured products from Shopify data
   const featuredProducts = products.slice(0, 4);
 
   const navigateToCollections = () => {
     setCurrentPage("collections");
-    // Don't scroll here - let the collections page handle it
   };
+
+  if (loading || featuredProducts.length === 0) {
+    return null;
+  }
 
   return (
     <section className="py-24 bg-white">
@@ -46,17 +50,23 @@ const FeaturedProducts = () => {
               onClick={() => setSelectedProduct(product)}
             >
               <div className="relative h-64 mb-4 overflow-hidden rounded-lg bg-gray-100">
-                <div
-                  className="h-full flex items-center justify-center"
-                  style={{ backgroundColor: product.color + "20" }}
-                >
-                  <motion.div
-                    className="w-32 h-32 rounded-full"
-                    style={{ backgroundColor: product.color }}
-                    whileHover={{ scale: 1.1, rotate: 10 }}
-                    transition={{ type: "spring", stiffness: 300 }}
+                {product.image ? (
+                  <img
+                    src={product.image}
+                    alt={product.imageAlt || product.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                </div>
+                ) : (
+                  <div
+                    className="h-full flex items-center justify-center"
+                    style={{ backgroundColor: (product.color || "#8B9D77") + "20" }}
+                  >
+                    <div
+                      className="w-32 h-32 rounded-full"
+                      style={{ backgroundColor: product.color || "#8B9D77" }}
+                    />
+                  </div>
+                )}
                 <div className="absolute top-4 left-4 flex items-center space-x-1 bg-white/90 backdrop-blur px-2 py-1 rounded">
                   <Star size={14} className="text-yellow-500 fill-current" />
                   <span className="text-xs">4.9</span>
