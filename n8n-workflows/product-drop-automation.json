@@ -1,0 +1,228 @@
+{
+  "name": "Product Drop Automation",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "shopify-product-drop",
+        "httpMethod": "POST",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "c1c1c1c1-1111-1111-1111-111111111111",
+      "name": "Shopify Product Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [260, 340],
+      "webhookId": "shopify-product-drop"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Extract product data from Shopify webhook\nconst product = $input.first().json.body;\n\nreturn [{\n  json: {\n    productName: product.title || 'New Product',\n    productId: product.id || '',\n    productImage: (product.images && product.images[0]) ? product.images[0].src : '',\n    productPrice: (product.variants && product.variants[0]) ? product.variants[0].price : 'N/A',\n    productDescription: product.body_html || '',\n    productTags: product.tags || ''\n  }\n}];"
+      },
+      "id": "c2c2c2c2-2222-2222-2222-222222222222",
+      "name": "Extract Product Data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [480, 340]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-api-key",
+              "value": "=YOUR_ANTHROPIC_API_KEY"
+            },
+            {
+              "name": "anthropic-version",
+              "value": "2023-06-01"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"claude-sonnet-4-20250514\",\n  \"max_tokens\": 1024,\n  \"system\": \"You are a copywriter for The Green Standard, a premium accessible golf accessories brand. Write in lowercase, calm, minimal tone. Never use exclamation marks. Output valid JSON only.\",\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"Product: {{ $json.productName }}\\nDescription: {{ $json.productDescription }}\\nTags: {{ $json.productTags }}\\n\\nGenerate JSON with these keys:\\n- description: 2-3 sentence product description\\n- emailSubject: email subject line for drop announcement\\n- tiktokCaption: under 150 chars, trending style\\n- instagramCaption: with relevant hashtags\\n- telegramCaption: direct and conversational\"\n    }\n  ]\n}",
+        "options": {}
+      },
+      "id": "c3c3c3c3-3333-3333-3333-333333333333",
+      "name": "Generate AI Content",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [700, 340]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Parse the AI response and combine with product data\nconst aiResponse = $input.first().json;\nconst productData = $('Extract Product Data').first().json;\n\nlet parsed;\ntry {\n  parsed = JSON.parse(aiResponse.content[0].text);\n} catch(e) {\n  parsed = {\n    description: 'New product from The Green Standard.',\n    emailSubject: 'new drop: ' + productData.productName,\n    tiktokCaption: productData.productName.toLowerCase() + '. available now.',\n    instagramCaption: productData.productName.toLowerCase() + '. link in bio. #thegreenstandard #golf',\n    telegramCaption: 'new drop: ' + productData.productName\n  };\n}\n\nreturn [{\n  json: {\n    ...productData,\n    ...parsed\n  }\n}];"
+      },
+      "id": "c4c4c4c4-4444-4444-4444-444444444444",
+      "name": "Parse AI Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [920, 340]
+    },
+    {
+      "parameters": {
+        "chatId": "YOUR_TELEGRAM_CHAT_ID",
+        "text": "=NEW PRODUCT DROP READY\n\nProduct: {{ $json.productName }}\nPrice: {{ $json.productPrice }}\n\nDESCRIPTION:\n{{ $json.description }}\n\nEMAIL SUBJECT:\n{{ $json.emailSubject }}\n\nTIKTOK:\n{{ $json.tiktokCaption }}\n\nINSTAGRAM:\n{{ $json.instagramCaption }}\n\nTELEGRAM:\n{{ $json.telegramCaption }}\n\nReply APPROVE or REJECT",
+        "additionalFields": {}
+      },
+      "id": "c5c5c5c5-5555-5555-5555-555555555555",
+      "name": "Send to Telegram for Approval",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [1140, 340]
+    },
+    {
+      "parameters": {
+        "chatId": "YOUR_TELEGRAM_CHANNEL_ID",
+        "text": "=NEW DROP\n\n{{ $json.productName }}\n\n{{ $json.description }}\n\nPrice: {{ $json.productPrice }}\n\n{{ $json.telegramCaption }}",
+        "additionalFields": {}
+      },
+      "id": "c6c6c6c6-6666-6666-6666-666666666666",
+      "name": "Post to Telegram Channel",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [1580, 220]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://a.klaviyo.com/api/events/",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Klaviyo-API-Key YOUR_KLAVIYO_PRIVATE_KEY"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "revision",
+              "value": "2024-02-15"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"data\": {\n    \"type\": \"event\",\n    \"attributes\": {\n      \"metric\": {\n        \"data\": {\n          \"type\": \"metric\",\n          \"attributes\": {\n            \"name\": \"Product Drop Launch\"\n          }\n        }\n      },\n      \"properties\": {\n        \"product_name\": \"{{ $json.productName }}\",\n        \"product_price\": \"{{ $json.productPrice }}\"\n      },\n      \"profile\": {\n        \"data\": {\n          \"type\": \"profile\",\n          \"attributes\": {\n            \"email\": \"drop-trigger@thegreenstandard.com\"\n          }\n        }\n      }\n    }\n  }\n}",
+        "options": {}
+      },
+      "id": "c7c7c7c7-7777-7777-7777-777777777777",
+      "name": "Trigger Klaviyo Drop Email",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1580, 420]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.bufferapp.com/1/updates/create.json",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer YOUR_BUFFER_ACCESS_TOKEN"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/x-www-form-urlencoded"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "string",
+        "body": "=profile_ids[]=YOUR_BUFFER_PROFILE_ID&text={{ encodeURIComponent($json.tiktokCaption) }}&now=true",
+        "options": {}
+      },
+      "id": "c8c8c8c8-8888-8888-8888-888888888888",
+      "name": "Schedule TikTok via Buffer",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1580, 620]
+    }
+  ],
+  "connections": {
+    "Shopify Product Webhook": {
+      "main": [
+        [
+          {
+            "node": "Extract Product Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Product Data": {
+      "main": [
+        [
+          {
+            "node": "Generate AI Content",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate AI Content": {
+      "main": [
+        [
+          {
+            "node": "Parse AI Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse AI Response": {
+      "main": [
+        [
+          {
+            "node": "Send to Telegram for Approval",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send to Telegram for Approval": {
+      "main": [
+        [
+          {
+            "node": "Post to Telegram Channel",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Trigger Klaviyo Drop Email",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Schedule TikTok via Buffer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {},
+  "versionId": ""
+}

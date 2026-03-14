@@ -2,6 +2,7 @@ import { lazy, Suspense } from "react";
 import { AnimatePresence } from "framer-motion";
 import { CartProvider } from "./context/CartContext";
 import { ViewProvider, useView } from "./context/ViewContext";
+import { AuthProvider } from "./context/AuthContext";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import HomePage from "./components/pages/HomePage";
@@ -18,6 +19,9 @@ const PrivacyPolicyPage = lazy(() => import("./components/pages/PrivacyPolicyPag
 const TermsPage = lazy(() => import("./components/pages/TermsPage"));
 const ShippingReturnsPage = lazy(() => import("./components/pages/ShippingReturnsPage"));
 const FAQPage = lazy(() => import("./components/pages/FAQPage"));
+const LoginPage = lazy(() => import("./components/pages/LoginPage"));
+const SignUpPage = lazy(() => import("./components/pages/SignUpPage"));
+const AccountPage = lazy(() => import("./components/pages/AccountPage"));
 
 const PageLoader = () => (
   <div className="min-h-screen pt-28 flex items-center justify-center bg-white">
@@ -44,6 +48,12 @@ const AppContent = () => {
         return <ShippingReturnsPage key="shipping" />;
       case "faq":
         return <FAQPage key="faq" />;
+      case "login":
+        return <LoginPage key="login" />;
+      case "signup":
+        return <SignUpPage key="signup" />;
+      case "account":
+        return <AccountPage key="account" />;
       default:
         return <HomePage key="home" />;
     }
@@ -65,11 +75,13 @@ const AppContent = () => {
 
 function App() {
   return (
-    <CartProvider>
-      <ViewProvider>
-        <AppContent />
-      </ViewProvider>
-    </CartProvider>
+    <AuthProvider>
+      <CartProvider>
+        <ViewProvider>
+          <AppContent />
+        </ViewProvider>
+      </CartProvider>
+    </AuthProvider>
   );
 }
 

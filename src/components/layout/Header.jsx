@@ -1,15 +1,17 @@
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, User } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Logo from "../ui/Logo";
 import CartButton from "../cart/CartButton";
 import Navigation from "./Navigation";
 import { useView } from "../../context/ViewContext";
+import { useAuth } from "../../context/AuthContext";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { currentPage } = useView();
+  const { currentPage, setCurrentPage } = useView();
+  const { isAuthenticated, customer } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,6 +41,20 @@ const Header = () => {
           <Navigation className="hidden md:flex" textClass={textClass} />
 
           <div className="flex items-center space-x-4">
+            <button
+              onClick={() => setCurrentPage(isAuthenticated ? "account" : "login")}
+              className={`p-2 rounded-full hover:bg-black/5 transition-colors ${textClass}`}
+              title={isAuthenticated ? `Hi, ${customer?.firstName || "Account"}` : "Sign In"}
+            >
+              {isAuthenticated ? (
+                <div className="w-7 h-7 rounded-full bg-green-600 flex items-center justify-center text-white text-xs font-semibold">
+                  {(customer?.firstName?.[0] || "U").toUpperCase()}
+                </div>
+              ) : (
+                <User className={`w-5 h-5 ${isTransparent ? "text-white" : ""}`} />
+              )}
+            </button>
+
             <div className={isTransparent ? "brightness-0 invert" : ""}>
               <CartButton />
             </div>

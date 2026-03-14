@@ -1,0 +1,29 @@
+ELEVENLABS VOICE SCRIPT — 01: Brand Introduction
+For: TikTok / Instagram Reels (Brand Introduction — Who We Are)
+Duration: ~45 seconds
+Voice: Your cloned voice — calm, warm, conversational
+Pacing: Slow. Let each sentence breathe.
+---
+
+I fell in love with golf about a year ago.
+
+But every time I looked for gear that felt like me — clean, minimal, not trying too hard — I couldn't find it.
+
+Everything was either overpriced exclusivity... or generic.
+
+So I built The Green Standard.
+
+With AI. With friends. With family.
+
+No investors. No gatekeeping.
+
+Just good products for people who see golf the way I do.
+
+As peace... not performance.
+
+---
+NOTES:
+- Record with slight pauses between paragraphs (marked by line breaks)
+- The "As peace... not performance" line should land with weight — slower delivery
+- Background: pair with golden hour course footage, walking shots
+- Export as .mp3, 44.1kHz, mono

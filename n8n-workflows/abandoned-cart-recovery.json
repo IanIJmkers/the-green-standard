@@ -1,0 +1,235 @@
+{
+  "name": "Abandoned Cart Recovery",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "shopify-abandoned-cart",
+        "httpMethod": "POST",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "e1e1e1e1-1111-1111-1111-111111111111",
+      "name": "Shopify Cart Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [260, 340],
+      "webhookId": "shopify-abandoned-cart"
+    },
+    {
+      "parameters": {
+        "jsCode": "const cart = $input.first().json.body;\n\nreturn [{\n  json: {\n    cartId: cart.id || cart.token || '',\n    customerEmail: cart.email || cart.customer?.email || '',\n    totalPrice: cart.total_price || '0',\n    currency: cart.currency || 'EUR',\n    lineItems: (cart.line_items || []).map(item => item.title).join(', '),\n    itemCount: (cart.line_items || []).length,\n    checkoutUrl: cart.abandoned_checkout_url || '',\n    createdAt: cart.created_at || new Date().toISOString()\n  }\n}];"
+      },
+      "id": "e2e2e2e2-2222-2222-2222-222222222222",
+      "name": "Extract Cart Data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [480, 340]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "check-email",
+              "leftValue": "={{ $json.customerEmail }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "e3e3e3e3-3333-3333-3333-333333333333",
+      "name": "Has Email?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [700, 340]
+    },
+    {
+      "parameters": {
+        "amount": 1,
+        "unit": "hours"
+      },
+      "id": "e4e4e4e4-4444-4444-4444-444444444444",
+      "name": "Wait 1 Hour",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [920, 240],
+      "webhookId": "wait-1h-cart"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://a.klaviyo.com/api/events/",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Klaviyo-API-Key YOUR_KLAVIYO_PRIVATE_KEY"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "revision",
+              "value": "2024-02-15"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"data\": {\n    \"type\": \"event\",\n    \"attributes\": {\n      \"metric\": {\n        \"data\": {\n          \"type\": \"metric\",\n          \"attributes\": {\n            \"name\": \"Abandoned Cart Stage 1\"\n          }\n        }\n      },\n      \"properties\": {\n        \"cart_items\": \"{{ $json.lineItems }}\",\n        \"cart_total\": \"{{ $json.totalPrice }}\",\n        \"checkout_url\": \"{{ $json.checkoutUrl }}\"\n      },\n      \"profile\": {\n        \"data\": {\n          \"type\": \"profile\",\n          \"attributes\": {\n            \"email\": \"{{ $json.customerEmail }}\"\n          }\n        }\n      }\n    }\n  }\n}",
+        "options": {}
+      },
+      "id": "e5e5e5e5-5555-5555-5555-555555555555",
+      "name": "Klaviyo Reminder Email",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1140, 240]
+    },
+    {
+      "parameters": {
+        "amount": 24,
+        "unit": "hours"
+      },
+      "id": "e6e6e6e6-6666-6666-6666-666666666666",
+      "name": "Wait 24 Hours",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [1360, 240],
+      "webhookId": "wait-24h-cart"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://a.klaviyo.com/api/events/",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Klaviyo-API-Key YOUR_KLAVIYO_PRIVATE_KEY"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "revision",
+              "value": "2024-02-15"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"data\": {\n    \"type\": \"event\",\n    \"attributes\": {\n      \"metric\": {\n        \"data\": {\n          \"type\": \"metric\",\n          \"attributes\": {\n            \"name\": \"Abandoned Cart Stage 2 Social Proof\"\n          }\n        }\n      },\n      \"properties\": {\n        \"cart_items\": \"{{ $json.lineItems }}\",\n        \"cart_total\": \"{{ $json.totalPrice }}\",\n        \"checkout_url\": \"{{ $json.checkoutUrl }}\"\n      },\n      \"profile\": {\n        \"data\": {\n          \"type\": \"profile\",\n          \"attributes\": {\n            \"email\": \"{{ $json.customerEmail }}\"\n          }\n        }\n      }\n    }\n  }\n}",
+        "options": {}
+      },
+      "id": "e7e7e7e7-7777-7777-7777-777777777777",
+      "name": "Klaviyo Social Proof Email",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1580, 240]
+    },
+    {
+      "parameters": {
+        "amount": 48,
+        "unit": "hours"
+      },
+      "id": "e8e8e8e8-8888-8888-8888-888888888888",
+      "name": "Wait 48 Hours",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [1800, 240],
+      "webhookId": "wait-48h-cart"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://a.klaviyo.com/api/events/",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Klaviyo-API-Key YOUR_KLAVIYO_PRIVATE_KEY"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "revision",
+              "value": "2024-02-15"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"data\": {\n    \"type\": \"event\",\n    \"attributes\": {\n      \"metric\": {\n        \"data\": {\n          \"type\": \"metric\",\n          \"attributes\": {\n            \"name\": \"Abandoned Cart Stage 3 Discount\"\n          }\n        }\n      },\n      \"properties\": {\n        \"cart_items\": \"{{ $json.lineItems }}\",\n        \"cart_total\": \"{{ $json.totalPrice }}\",\n        \"checkout_url\": \"{{ $json.checkoutUrl }}\",\n        \"discount_code\": \"STANDARD10\"\n      },\n      \"profile\": {\n        \"data\": {\n          \"type\": \"profile\",\n          \"attributes\": {\n            \"email\": \"{{ $json.customerEmail }}\"\n          }\n        }\n      }\n    }\n  }\n}",
+        "options": {}
+      },
+      "id": "e9e9e9e9-9999-9999-9999-999999999999",
+      "name": "Klaviyo Discount Email",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [2020, 240]
+    },
+    {
+      "parameters": {
+        "chatId": "YOUR_TELEGRAM_CHAT_ID",
+        "text": "=ABANDONED CART RECOVERY TRIGGERED\n\nCustomer: {{ $json.customerEmail }}\nItems: {{ $json.lineItems }}\nTotal: {{ $json.totalPrice }} {{ $json.currency }}\n\n3-stage email sequence started.",
+        "additionalFields": {}
+      },
+      "id": "eaeaeaea-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+      "name": "Notify on Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [1140, 440]
+    }
+  ],
+  "connections": {
+    "Shopify Cart Webhook": {
+      "main": [[{"node": "Extract Cart Data", "type": "main", "index": 0}]]
+    },
+    "Extract Cart Data": {
+      "main": [[{"node": "Has Email?", "type": "main", "index": 0}]]
+    },
+    "Has Email?": {
+      "main": [
+        [{"node": "Wait 1 Hour", "type": "main", "index": 0}],
+        []
+      ]
+    },
+    "Wait 1 Hour": {
+      "main": [[{"node": "Klaviyo Reminder Email", "type": "main", "index": 0}, {"node": "Notify on Telegram", "type": "main", "index": 0}]]
+    },
+    "Klaviyo Reminder Email": {
+      "main": [[{"node": "Wait 24 Hours", "type": "main", "index": 0}]]
+    },
+    "Wait 24 Hours": {
+      "main": [[{"node": "Klaviyo Social Proof Email", "type": "main", "index": 0}]]
+    },
+    "Klaviyo Social Proof Email": {
+      "main": [[{"node": "Wait 48 Hours", "type": "main", "index": 0}]]
+    },
+    "Wait 48 Hours": {
+      "main": [[{"node": "Klaviyo Discount Email", "type": "main", "index": 0}]]
+    }
+  },
+  "active": false,
+  "settings": {"executionOrder": "v1"},
+  "pinData": {},
+  "versionId": ""
+}

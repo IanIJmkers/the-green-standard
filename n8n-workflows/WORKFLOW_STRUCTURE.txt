@@ -1,0 +1,286 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                THE GREEN STANDARD - n8n WORKFLOW STRUCTURE                    ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1️⃣  PRODUCT DROP AUTOMATION (product-drop-automation.json)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+TRIGGER: Shopify Webhook (product/create or /update with tag "drop-ready")
+FREQUENCY: Event-based (manual product creation)
+
+WORKFLOW NODES:
+┌─────────────────────────────────────────────────────────────────┐
+│ 1. Shopify Product Webhook                                       │
+│    └─ Listens for product events                                │
+│                                                                  │
+│ 2. Generate AI Content (OpenAI API)                             │
+│    └─ Generates 5 pieces of content (description, 3 captions)   │
+│                                                                  │
+│ 3. Parse AI Response (JavaScript)                               │
+│    └─ Extracts structured content from AI response              │
+│                                                                  │
+│ 4. Send to Telegram for Approval                                │
+│    └─ Displays all generated content to team                    │
+│                                                                  │
+│ 5. Wait for Approval (Manual)                                   │
+│    └─ Pauses workflow for human decision (3600 seconds / 1hr)   │
+│                                                                  │
+│ 6. Approved? (Conditional Logic)                                │
+│    └─ Splits into two paths: ✅ APPROVE or ❌ REJECT            │
+│                                                                  │
+│ IF APPROVED:                                                     │
+│    7a. Trigger Klaviyo Email (Email Marketing)                  │
+│    7b. Post to Telegram Channel (Announcement)                  │
+│    7c. Schedule TikTok via Buffer (Social Media)                │
+│    7d. Schedule Instagram via Buffer (Social Media)             │
+│                                                                  │
+│ IF REJECTED:                                                     │
+│    7e. Send Rejection Notice                                    │
+│        └─ Team revises and tries again                          │
+└─────────────────────────────────────────────────────────────────┘
+
+INTEGRATIONS:
+  • Shopify (webhook trigger, product data)
+  • OpenAI/Claude (content generation)
+  • Telegram (team approval, announcements)
+  • Klaviyo (email event trigger)
+  • Buffer (social media scheduling)
+
+TIME TO EXECUTE: ~2-5 minutes (plus 1 hour approval window)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2️⃣  CONTENT CALENDAR ENGINE (content-calendar-engine.json)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+TRIGGER: Daily Cron (9:00 AM CET)
+FREQUENCY: Once per day
+
+WORKFLOW NODES:
+┌─────────────────────────────────────────────────────────────────┐
+│ 1. Daily Cron 9 AM CET (Scheduler)                              │
+│    └─ Executes automatically at 9:00 AM every day               │
+│                                                                  │
+│ 2. Query Notion Content Calendar                                │
+│    └─ Fetches all posts scheduled for today (Status="Scheduled")│
+│                                                                  │
+│ 3. Transform Notion Data (JavaScript)                           │
+│    └─ Extracts title, brief, platform, tone from each post      │
+│                                                                  │
+│ 4. For Each Post (Loop Processor)                               │
+│    └─ Processes one post at a time                              │
+│       │                                                          │
+│       ├─ 5. Generate Caption with OpenAI                        │
+│       │    └─ Creates platform-optimized caption from brief     │
+│       │                                                          │
+│       ├─ 6. Parse Generated Caption (JavaScript)                │
+│       │    └─ Structures caption and hashtags                   │
+│       │                                                          │
+│       ├─ 7. Send to Telegram for Review                         │
+│       │    └─ Shows caption to team for approval (30 min)       │
+│       │                                                          │
+│       ├─ 8. Wait for Review (Manual)                            │
+│       │    └─ Pauses for human decision                         │
+│       │                                                          │
+│       └─ 9. Content Approved? (Conditional)                     │
+│            ├─ IF YES:                                            │
+│            │  ├─ Post to Buffer (Social scheduling)             │
+│            │  └─ Update Notion Status → "Published"             │
+│            └─ IF NO:                                             │
+│               └─ Send Rejection Message                         │
+└─────────────────────────────────────────────────────────────────┘
+
+INTEGRATIONS:
+  • Notion (content database queries & updates)
+  • OpenAI/Claude (caption generation per platform)
+  • Telegram (team review workflow)
+  • Buffer (social media posting)
+
+TIME TO EXECUTE: ~30 seconds per post + 30 min approval window
+PARALLEL CAPACITY: Processes all daily posts in sequence
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+3️⃣  ABANDONED CART RECOVERY (abandoned-cart-recovery.json)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+TRIGGER: Shopify Webhook (carts/update)
+FREQUENCY: Event-based (cart activity)
+FLOW DURATION: 3 days (72 hours total)
+
+WORKFLOW NODES & TIMELINE:
+
+┌─────────────────────────────────────────────────────────────────┐
+│ START: Customer adds items but doesn't checkout                 │
+│                                                                  │
+│ 1. Shopify Cart Update Webhook                                  │
+│    └─ Captures abandoned cart event                             │
+│                                                                  │
+│ 2. Extract Cart Details (JavaScript)                            │
+│    └─ Gets email, total, items, token, timestamp                │
+│                                                                  │
+│ STAGE 1 - FIRST EMAIL (1 Hour Later):                          │
+│ ├─ 3. Wait 1 Hour                                               │
+│ ├─ 4. Check Order Conversion (Shopify API)                      │
+│ │    └─ Query: "Was this cart converted to an order?"           │
+│ │                                                                │
+│ └─ 5. Not Converted Yet? (Conditional)                          │
+│      └─ IF YES → 6a. Trigger First Email (Klaviyo)             │
+│         └─ Sends: "Don't forget your items!" with product link  │
+│                                                                  │
+│                                                                  │
+│ STAGE 2 - SECOND EMAIL WITH SOCIAL PROOF (24 Hours Later):     │
+│ ├─ 7. Wait 24 Hours (from Stage 1)                              │
+│ ├─ 8. Check Order Conversion (Shopify API)                      │
+│ │    └─ Query again: "Was order placed?"                        │
+│ │                                                                │
+│ └─ 9. Still Not Converted? (Conditional)                        │
+│      └─ IF YES → 10a. Trigger Second Email (Klaviyo)           │
+│         └─ Sends: "Other customers love this" + social proof    │
+│                                                                  │
+│                                                                  │
+│ STAGE 3 - FINAL EMAIL WITH DISCOUNT (48 Hours Later):          │
+│ ├─ 11. Wait 48 Hours (from Stage 2)                             │
+│ ├─ 12. Check Order Conversion (Shopify API)                     │
+│ │     └─ Final check                                             │
+│ │                                                                │
+│ └─ 13. Still Not Converted After 48h? (Conditional)             │
+│      └─ IF YES:                                                  │
+│         ├─ 14a. Generate 10% Discount Code (Shopify API)        │
+│         └─ 14b. Trigger Final Email (Klaviyo)                   │
+│            └─ Sends: "Here's 10% off to complete your order!"   │
+│                                                                  │
+│ END: Cart either converts OR discounts expire                   │
+└─────────────────────────────────────────────────────────────────┘
+
+TIMELINE VISUALIZATION:
+    T+0h         T+1h         T+25h        T+73h
+    Cart         Email 1      Email 2      Email 3 + Discount
+    Created      Sent         Sent         Sent
+    │────────→   │──────────→ │──────────→ │
+    └─ 1 hour ─┘└─ 24 hours ─┘└─ 48 hours ┘
+
+INTEGRATIONS:
+  • Shopify (webhook trigger, order status checks, discount codes)
+  • Klaviyo (3 separate email events)
+
+TOTAL RUNTIME: 72 hours (3 days)
+CONDITIONAL STOPS: If order placed at any stage, workflow stops
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+4️⃣  WEEKLY ANALYTICS DIGEST (weekly-analytics-digest.json)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+TRIGGER: Weekly Cron (Every Monday at 8:00 AM CET)
+FREQUENCY: Once per week
+
+WORKFLOW NODES:
+
+┌──────────────────────────────────────────────────────────────────┐
+│ 1. Weekly Cron Monday 8 AM CET (Scheduler)                       │
+│    └─ Executes automatically every Monday at 8 AM                │
+│                                                                   │
+│ 2-5. PARALLEL API CALLS (All run simultaneously):                │
+│                                                                   │
+│    ┌──────────────────────────┐                                  │
+│    │ 2. Fetch Shopify Orders  │                                  │
+│    │    └─ Last 7 days data   │                                  │
+│    │       • Order count      │                                  │
+│    │       • Total revenue    │                                  │
+│    │       • Top 5 products   │                                  │
+│    └──────────────────────────┘                                  │
+│                                                                   │
+│    ┌──────────────────────────┐                                  │
+│    │ 3. Fetch Stripe Revenue  │                                  │
+│    │    └─ Last 7 days        │                                  │
+│    │       • Paid charges     │                                  │
+│    │       • Total revenue    │                                  │
+│    └──────────────────────────┘                                  │
+│                                                                   │
+│    ┌──────────────────────────┐                                  │
+│    │ 4. Fetch Instagram Data  │                                  │
+│    │    └─ Last 7 days        │                                  │
+│    │       • Impressions      │                                  │
+│    │       • Reach            │                                  │
+│    │       • Profile views    │                                  │
+│    └──────────────────────────┘                                  │
+│                                                                   │
+│    ┌──────────────────────────┐                                  │
+│    │ 5. Fetch TikTok Stats    │                                  │
+│    │    └─ Last 7 days        │                                  │
+│    │       • Total views      │                                  │
+│    │       • Follower count   │                                  │
+│    └──────────────────────────┘                                  │
+│                 │                                                │
+│                 ↓                                                │
+│    6. Compile Analytics Data (JavaScript)                        │
+│       └─ Merges all data into structured format                  │
+│          • Combines Shopify + Stripe revenue                     │
+│          • Calculates top products                               │
+│          • Structures social metrics                             │
+│                 │                                                │
+│                 ↓                                                │
+│    7. Send Telegram Digest                                       │
+│       └─ Posts formatted message to channel                      │
+│          with markdown formatting and emojis                     │
+│                                                                   │
+│ OUTPUT INCLUDES:                                                  │
+│ ├─ 💰 REVENUE & SALES                                            │
+│ │  ├─ Total revenue (Shopify + Stripe)                           │
+│ │  └─ Total orders                                               │
+│ │                                                                │
+│ ├─ 🏆 TOP PRODUCTS                                               │
+│ │  └─ Ranked by units sold                                       │
+│ │                                                                │
+│ ├─ 📸 INSTAGRAM INSIGHTS                                         │
+│ │  ├─ Impressions                                                │
+│ │  ├─ Reach                                                      │
+│ │  └─ Profile views                                              │
+│ │                                                                │
+│ └─ 🎵 TIKTOK METRICS                                             │
+│    ├─ Total views                                                │
+│    └─ Followers                                                  │
+│                                                                   │
+└──────────────────────────────────────────────────────────────────┘
+
+INTEGRATIONS:
+  • Shopify (order data, revenue)
+  • Stripe (payment processing, revenue)
+  • Instagram (business insights API)
+  • TikTok (analytics API)
+  • Telegram (report delivery)
+
+TIME TO EXECUTE: ~30 seconds
+PARALLELIZATION: All data fetches run simultaneously
+REPORT FORMAT: Markdown formatted Telegram message
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+COMBINED WORKFLOW STATS:
+═════════════════════════════════════════════════════════════════════════════
+
+Total Workflows: 4
+Total Nodes: 35+
+Integration Points: 11 different services
+Automation Coverage:
+  • Product launches ✅
+  • Content distribution ✅
+  • Email recovery campaigns ✅
+  • Analytics reporting ✅
+
+Estimated Monthly Executions:
+  • Product Drop: 2-5 times (manual trigger)
+  • Content Calendar: 30 times (daily automatic)
+  • Abandoned Cart: 100-500 times (per cart activity)
+  • Analytics Digest: 4 times (weekly automatic)
+  └─ TOTAL: 150-1000+ automated actions per month
+
+Data Flow Volume:
+  • Shopify webhooks: Daily
+  • Notion database: Daily queries
+  • Social media APIs: Weekly (analytics)
+  • Email events: On-demand (Klaviyo)
+
+Approval Gates: 2 workflows require human review
+  • Product Drop (1-hour window)
+  • Content Calendar (30-minute window)
+

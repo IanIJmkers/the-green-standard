@@ -8,6 +8,20 @@
         "POLARIS_UNIFIED": "true",
         "LIQUID": "true"
       }
+    },
+    "n8n-mcp": {
+      "command": "npx",
+      "args": ["-y", "n8n-mcp"],
+      "env": {
+        "MCP_MODE": "stdio",
+        "LOG_LEVEL": "error",
+        "DISABLE_CONSOLE_OUTPUT": "true",
+        "N8N_API_URL": "https://ianijmkers.app.n8n.cloud",
+        "N8N_API_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0MzA2MThkYy1mNzk2LTRmZDMtYWRiMi02YzQwZTBjYmIxYTEiLCJpc3MiOiJuOG4iLCJhdWQiOiJwdWJsaWMtYXBpIiwiaWF0IjoxNzY4NjcyODA4LCJleHAiOjE3NzExOTY0MDB9.jQYjw6gt5TU9XNNxwXzHNRzvCRCaQTjnt4m7GSSHS5c"
+      }
     }
   }
 }
+
+
+
