@@ -16,7 +16,8 @@ const LoginPage = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+    clearError();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Redirect if already signed in
   useEffect(() => {
