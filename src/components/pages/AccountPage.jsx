@@ -4,13 +4,13 @@ import {
   User, Package, MapPin, LogOut, Edit3, Save, X, Loader2,
   ChevronRight, ShoppingBag, Clock, CheckCircle, Truck, AlertCircle
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import { useView } from "../../context/ViewContext";
 import { formatPrice } from "../../utils/formatPrice";
 
 const AccountPage = () => {
   const { customer, isAuthenticated, signOut, updateProfile, loading, initializing } = useAuth();
-  const { setCurrentPage } = useView();
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("orders");
   const [editing, setEditing] = useState(false);
   const [editData, setEditData] = useState({});
@@ -23,13 +23,13 @@ const AccountPage = () => {
   // Redirect if not authenticated
   useEffect(() => {
     if (!initializing && !isAuthenticated) {
-      setCurrentPage("login");
+      navigate("/login");
     }
-  }, [isAuthenticated, initializing, setCurrentPage]);
+  }, [isAuthenticated, initializing, navigate]);
 
   const handleSignOut = async () => {
     await signOut();
-    setCurrentPage("home");
+    navigate("/");
   };
 
   const startEditing = () => {
@@ -161,7 +161,7 @@ const AccountPage = () => {
                     When you place an order, it will appear here.
                   </p>
                   <button
-                    onClick={() => setCurrentPage("collections")}
+                    onClick={() => navigate("/collections")}
                     className="inline-flex items-center gap-2 bg-green-600 text-white px-6 py-3 rounded-xl font-medium hover:bg-green-700 transition-colors"
                   >
                     Start Shopping

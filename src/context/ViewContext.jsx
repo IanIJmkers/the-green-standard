@@ -11,7 +11,6 @@ export const useView = () => {
 };
 
 export const ViewProvider = ({ children }) => {
-  const [currentPage, setCurrentPage] = useState("home");
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [viewMode, setViewMode] = useState("grid"); // 'grid' or 'experience'
 
@@ -22,8 +21,6 @@ export const ViewProvider = ({ children }) => {
   return (
     <ViewContext.Provider
       value={{
-        currentPage,
-        setCurrentPage,
         selectedProduct,
         setSelectedProduct,
         viewMode,

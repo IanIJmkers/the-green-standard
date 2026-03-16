@@ -1,7 +1,8 @@
 import { lazy, Suspense } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { CartProvider } from "./context/CartContext";
-import { ViewProvider, useView } from "./context/ViewContext";
+import { ViewProvider } from "./context/ViewContext";
 import { AuthProvider } from "./context/AuthContext";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
@@ -30,40 +31,27 @@ const PageLoader = () => (
 );
 
 const AppContent = () => {
-  const { currentPage } = useView();
-
-  const renderPage = () => {
-    switch (currentPage) {
-      case "collections":
-        return <CollectionsPage key="collections" />;
-      case "about":
-        return <AboutPage key="about" />;
-      case "contact":
-        return <ContactPage key="contact" />;
-      case "privacy":
-        return <PrivacyPolicyPage key="privacy" />;
-      case "terms":
-        return <TermsPage key="terms" />;
-      case "shipping":
-        return <ShippingReturnsPage key="shipping" />;
-      case "faq":
-        return <FAQPage key="faq" />;
-      case "login":
-        return <LoginPage key="login" />;
-      case "signup":
-        return <SignUpPage key="signup" />;
-      case "account":
-        return <AccountPage key="account" />;
-      default:
-        return <HomePage key="home" />;
-    }
-  };
+  const location = useLocation();
 
   return (
     <div className="App">
       <Header />
       <Suspense fallback={<PageLoader />}>
-        <AnimatePresence mode="wait">{renderPage()}</AnimatePresence>
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={location.pathname}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/collections" element={<CollectionsPage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+            <Route path="/terms-of-service" element={<TermsPage />} />
+            <Route path="/shipping-returns" element={<ShippingReturnsPage />} />
+            <Route path="/faq" element={<FAQPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignUpPage />} />
+            <Route path="/account" element={<AccountPage />} />
+          </Routes>
+        </AnimatePresence>
       </Suspense>
       <Footer />
       <ProductModal />

@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import Button from "../ui/Button";
 import FeaturedProducts from "../sections/FeaturedProducts";
 import FeaturedSection from "../sections/FeaturedSection";
-import { useView } from "../../context/ViewContext";
 
 const HomePage = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const { setCurrentPage } = useView();
+  const navigate = useNavigate();
 
   const heroImages = [
     {
@@ -41,7 +41,7 @@ const HomePage = () => {
   }, []);
 
   const navigateToCollections = () => {
-    setCurrentPage("collections");
+    navigate("/collections");
   };
 
   return (

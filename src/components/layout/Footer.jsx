@@ -1,29 +1,27 @@
 
-import { useView } from "../../context/ViewContext";
+import { Link } from "react-router-dom";
 import Logo from "../ui/Logo";
 
 const Footer = () => {
-  const { setCurrentPage } = useView();
-
   const footerLinks = {
     Shop: [
-      { label: "All Collections", page: "collections" },
-      { label: "Bestsellers", page: "home" },
-      { label: "New Arrivals", page: "collections" },
+      { label: "All Collections", path: "/collections" },
+      { label: "Bestsellers", path: "/" },
+      { label: "New Arrivals", path: "/collections" },
     ],
     Company: [
-      { label: "About Us", page: "about" },
-      { label: "Contact", page: "contact" },
+      { label: "About Us", path: "/about" },
+      { label: "Contact", path: "/contact" },
     ],
     "Customer Service": [
-      { label: "Shipping & Returns", page: "shipping" },
-      { label: "Order Tracking", page: "contact" },
-      { label: "FAQ", page: "faq" },
+      { label: "Shipping & Returns", path: "/shipping-returns" },
+      { label: "Order Tracking", path: "/contact" },
+      { label: "FAQ", path: "/faq" },
     ],
     Legal: [
-      { label: "Privacy Policy", page: "privacy" },
-      { label: "Terms of Service", page: "terms" },
-      { label: "Cookie Policy", page: "privacy" },
+      { label: "Privacy Policy", path: "/privacy-policy" },
+      { label: "Terms of Service", path: "/terms-of-service" },
+      { label: "Cookie Policy", path: "/privacy-policy" },
     ],
   };
 
@@ -58,15 +56,13 @@ const Footer = () => {
               <ul className="space-y-2">
                 {links.map((link) => (
                   <li key={link.label}>
-                    <button
-                      onClick={() => {
-                        setCurrentPage(link.page);
-                        window.scrollTo({ top: 0, behavior: "smooth" });
-                      }}
+                    <Link
+                      to={link.path}
+                      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
                       className="text-sm text-gray-400 hover:text-white transition-colors"
                     >
                       {link.label}
-                    </button>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -104,18 +100,18 @@ const Footer = () => {
             >
               EU Dispute Resolution
             </a>
-            <button
-              onClick={() => setCurrentPage("privacy")}
+            <Link
+              to="/privacy-policy"
               className="hover:text-gray-300 transition-colors"
             >
               Privacy
-            </button>
-            <button
-              onClick={() => setCurrentPage("terms")}
+            </Link>
+            <Link
+              to="/terms-of-service"
               className="hover:text-gray-300 transition-colors"
             >
               Terms
-            </button>
+            </Link>
           </div>
         </div>
       </div>

@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Mail, Lock, User, Eye, EyeOff, ArrowRight, Loader2 } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
-import { useView } from "../../context/ViewContext";
 
 const SignUpPage = () => {
   const { signUp, socialSignIn, loading, error, clearError, isAuthenticated } = useAuth();
-  const { setCurrentPage } = useView();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -22,9 +22,9 @@ const SignUpPage = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      setCurrentPage("account");
+      navigate("/account");
     }
-  }, [isAuthenticated, setCurrentPage]);
+  }, [isAuthenticated, navigate]);
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -38,7 +38,7 @@ const SignUpPage = () => {
 
     const result = await signUp(formData);
     if (result.success) {
-      setCurrentPage("account");
+      navigate("/account");
     }
   };
 
@@ -46,7 +46,7 @@ const SignUpPage = () => {
     clearError();
     const result = await socialSignIn(provider);
     if (result.success) {
-      setCurrentPage("account");
+      navigate("/account");
     }
   };
 
@@ -218,21 +218,19 @@ const SignUpPage = () => {
               />
               <span className="text-sm text-gray-500">
                 I agree to the{" "}
-                <button
-                  type="button"
-                  onClick={() => setCurrentPage("terms")}
+                <Link
+                  to="/terms-of-service"
                   className="text-green-600 hover:text-green-700 underline"
                 >
                   Terms of Service
-                </button>{" "}
+                </Link>{" "}
                 and{" "}
-                <button
-                  type="button"
-                  onClick={() => setCurrentPage("privacy")}
+                <Link
+                  to="/privacy-policy"
                   className="text-green-600 hover:text-green-700 underline"
                 >
                   Privacy Policy
-                </button>
+                </Link>
               </span>
             </label>
 
@@ -254,12 +252,12 @@ const SignUpPage = () => {
 
           <p className="text-center text-sm text-gray-500 mt-6">
             Already have an account?{" "}
-            <button
-              onClick={() => setCurrentPage("login")}
+            <Link
+              to="/login"
               className="text-green-600 font-medium hover:text-green-700"
             >
               Sign in
-            </button>
+            </Link>
           </p>
         </motion.div>
       </div>

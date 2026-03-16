@@ -1,11 +1,11 @@
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Button from "../ui/Button";
-import { useView } from "../../context/ViewContext";
 
 const AboutPage = () => {
-  const { setCurrentPage } = useView();
+  const navigate = useNavigate();
 
   // Smooth scroll to top with a slight delay for seamless transition
   useEffect(() => {
@@ -20,7 +20,7 @@ const AboutPage = () => {
   }, []);
 
   const navigateToCollections = () => {
-    setCurrentPage("collections");
+    navigate("/collections");
   };
 
   return (

@@ -1,41 +1,36 @@
-import { useView } from "../../context/ViewContext";
+import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
 const Navigation = ({ className = "", textClass = "" }) => {
-  const { setCurrentPage, currentPage } = useView();
+  const location = useLocation();
   const { isAuthenticated } = useAuth();
 
   const navItems = [
-    { label: "Home", page: "home" },
-    { label: "Collections", page: "collections" },
-    { label: "About", page: "about" },
-    { label: "Contact", page: "contact" },
+    { label: "Home", path: "/" },
+    { label: "Collections", path: "/collections" },
+    { label: "About", path: "/about" },
+    { label: "Contact", path: "/contact" },
     {
       label: isAuthenticated ? "Account" : "Sign In",
-      page: isAuthenticated ? "account" : "login",
+      path: isAuthenticated ? "/account" : "/login",
       mobileOnly: true,
     },
   ];
-
-  const handleNavClick = (page) => {
-    setCurrentPage(page);
-    // Don't scroll here - let the page component handle it
-  };
 
   return (
     <nav
       className={`${className} items-center space-x-8 md:space-x-8 space-y-0 md:space-y-0`}
     >
       {navItems.map((item) => (
-        <button
+        <Link
           key={item.label}
-          onClick={() => handleNavClick(item.page)}
+          to={item.path}
           className={`text-sm tracking-wider hover:text-green-600 transition-colors ${textClass} ${
-            currentPage === item.page ? "text-green-600" : ""
+            location.pathname === item.path ? "text-green-600" : ""
           } ${item.mobileOnly ? "md:hidden" : ""}`}
         >
           {item.label}
-        </button>
+        </Link>
       ))}
     </nav>
   );

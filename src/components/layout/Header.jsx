@@ -1,16 +1,17 @@
 import { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Menu, X, User } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Logo from "../ui/Logo";
 import CartButton from "../cart/CartButton";
 import Navigation from "./Navigation";
-import { useView } from "../../context/ViewContext";
 import { useAuth } from "../../context/AuthContext";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { currentPage, setCurrentPage } = useView();
+  const location = useLocation();
+  const navigate = useNavigate();
   const { isAuthenticated, customer } = useAuth();
 
   useEffect(() => {
@@ -21,7 +22,7 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const isTransparent = currentPage === "home" && !scrolled;
+  const isTransparent = location.pathname === "/" && !scrolled;
   const headerClass = isTransparent
     ? "bg-transparent"
     : "glass-effect border-b border-gray-100 shadow-sm";
@@ -42,7 +43,7 @@ const Header = () => {
 
           <div className="flex items-center space-x-4">
             <button
-              onClick={() => setCurrentPage(isAuthenticated ? "account" : "login")}
+              onClick={() => navigate(isAuthenticated ? "/account" : "/login")}
               className={`p-2 rounded-full hover:bg-black/5 transition-colors ${textClass}`}
               title={isAuthenticated ? `Hi, ${customer?.firstName || "Account"}` : "Sign In"}
             >

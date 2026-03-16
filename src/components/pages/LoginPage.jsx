@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Mail, Lock, Eye, EyeOff, ArrowRight, Loader2 } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
-import { useView } from "../../context/ViewContext";
 
 const LoginPage = () => {
   const { signIn, socialSignIn, recoverPassword, loading, error, clearError, isAuthenticated } = useAuth();
-  const { setCurrentPage } = useView();
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -22,16 +22,16 @@ const LoginPage = () => {
   // Redirect if already signed in
   useEffect(() => {
     if (isAuthenticated) {
-      setCurrentPage("account");
+      navigate("/account");
     }
-  }, [isAuthenticated, setCurrentPage]);
+  }, [isAuthenticated, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     clearError();
     const result = await signIn(email, password);
     if (result.success) {
-      setCurrentPage("account");
+      navigate("/account");
     }
   };
 
@@ -48,7 +48,7 @@ const LoginPage = () => {
     clearError();
     const result = await socialSignIn(provider);
     if (result.success) {
-      setCurrentPage("account");
+      navigate("/account");
     }
   };
 
@@ -250,12 +250,12 @@ const LoginPage = () => {
 
           <p className="text-center text-sm text-gray-500 mt-6">
             Don't have an account?{" "}
-            <button
-              onClick={() => setCurrentPage("signup")}
+            <Link
+              to="/signup"
               className="text-green-600 font-medium hover:text-green-700"
             >
               Create one
-            </button>
+            </Link>
           </p>
         </motion.div>
       </div>

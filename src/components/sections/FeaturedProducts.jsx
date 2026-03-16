@@ -1,4 +1,5 @@
 
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, Star } from "lucide-react";
 import { useCart } from "../../context/CartContext";
@@ -9,14 +10,15 @@ import Button from "../ui/Button";
 
 const FeaturedProducts = () => {
   const { addToCart } = useCart();
-  const { setSelectedProduct, setCurrentPage } = useView();
+  const { setSelectedProduct } = useView();
+  const navigate = useNavigate();
   const { products, loading } = useShopifyProducts();
 
   // Select featured products from Shopify data
   const featuredProducts = products.slice(0, 4);
 
   const navigateToCollections = () => {
-    setCurrentPage("collections");
+    navigate("/collections");
   };
 
   if (loading || featuredProducts.length === 0) {

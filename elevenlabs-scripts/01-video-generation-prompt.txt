@@ -1,0 +1,192 @@
+AI VIDEO GENERATION PROMPT — 01: Brand Introduction
+Platform: TikTok / Instagram Reels
+Aspect: 9:16 vertical · 1080×1920
+Duration: 60–75 seconds
+Framerate: 24fps
+Audio: Voiceover layer + ambient only (no music)
+
+Matched to voice script:
+"Golf was never meant to be loud. No scoreboards. No dress codes. No proving anything to anyone. Just grass. Air. And a quiet walk with people you care about. That's the game I fell in love with. So I made something for that version of golf. Clean. Simple. Nothing you'd ever have to explain. This is The Green Standard. Where peace meets the fairway."
+
+═══════════════════════════════════════════════════
+GLOBAL VISUAL DIRECTION
+═══════════════════════════════════════════════════
+
+Camera: Locked-off tripod or motorized slider. Zero handheld. Every camera movement is mechanical, slow, and deliberate — measured in millimeters. If the camera moves at all, it should feel like the earth shifting, not a person operating it.
+
+Lens: Anamorphic 40mm equivalent. Subtle horizontal flare when light enters frame edge. Shallow depth of field — f/2.0 or wider. Background elements dissolve into soft, painterly bokeh.
+
+Composition: Architectural. Centered subjects. Deliberate negative space taking up 60–70% of every frame. Symmetry where possible. Every frame composed as if it were a standalone print advertisement for a Japanese lifestyle magazine. Think Kinfolk editorial, Cereal Magazine, Muji campaign.
+
+Color: Kodak Portra 400 film emulation. Desaturated earth tones — sage green (#8B9D77), warm stone (#B8B0A2), deep moss (#5C6B4F), raw linen (#E8E3DA), desert sand (#D4C5A9). No orange-teal grading. No saturation boost. Highlights roll off soft and creamy. Shadows lifted — never crushed to pure black. Blacks sit around 15–20 IRE, giving a faded vintage quality without looking filtered.
+
+Grain: 35mm film grain overlaid at 15–20% opacity. Fine grain, not chunky. Just enough to kill the digital clinical sharpness and add organic texture.
+
+Light: Natural light only. No artificial lighting setups visible or implied. Dawn and early morning preferred — soft directional light with long, quiet shadows. Light should feel like it existed before the camera arrived.
+
+Pacing: Uncomfortably slow by social media standards. Every shot held 4–8 seconds minimum. Let the viewer settle into the frame before cutting. The stillness is the point. Silence between visual ideas. Breathe.
+
+Absolutely no: Humans, faces, silhouettes, figures, bodies, hands, fingers. No living subjects at all. No animals. The only "life" is the course itself — grass moving, mist drifting, light shifting. The world exists without people in it. It is calm because no one is there yet. One product appears once, and it is the only man-made object that feels intentional.
+
+═══════════════════════════════════════════════════
+SEQUENCE BREAKDOWN
+═══════════════════════════════════════════════════
+
+[0:00–0:08] "Golf was never meant to be loud."
+OPENING — ESTABLISHING STILLNESS
+
+Static wide. A golf course at dawn, shot from ground level at the edge of a fairway. The camera sits inches above the grass — you can see individual blades of dew-covered grass in the extreme foreground, sharp, while the fairway stretches out behind them into soft morning fog. The world is sage and cream and muted green. Nothing moves except a thin layer of mist drifting slowly left to right across the middle distance. No wind. No movement in the trees. The sky is a flat, desaturated warm grey — pre-sunrise, not golden hour. Hold this frame for the full 8 seconds. The viewer should feel like they just stepped outside into the quiet of 5:47am.
+
+Ambient audio: Absolute near-silence. A single distant bird call. The faintest hum of morning stillness — that low-frequency presence you hear when everything else is quiet.
+
+---
+
+[0:08–0:16] "No scoreboards. No dress codes. No proving anything to anyone."
+THREE ARCHITECTURAL STILL FRAMES
+
+Three locked-off shots, each held for 2.5–3 seconds, separated by 0.5-second cuts to black between them.
+
+Shot 1: An empty flagstick on a putting green, dead center of frame. The flag hangs limp — no wind. The green is immaculate, striped by a mower. Morning dew sits on the surface catching faint light. The pin is the only vertical element in a sea of horizontal negative space. Simple. Geometric.
+
+Shot 2: A golf cart path curving gently through a tree-lined corridor, completely empty. Overhead canopy of mature trees filtering soft dappled light onto the path. The path leads the eye into the distance and disappears around a bend. Symmetrical tree trunks on either side. No carts. No bags. No equipment. Just a path going somewhere quiet.
+
+Shot 3: Overhead drone shot, perfectly centered, looking straight down at a single tee box. The rectangular tee markers are visible — two small objects in a vast field of green. The geometric lines of the course radiate outward — the clean edge where the tee box meets the rough, the rough meets the fairway, the fairway stretches toward a distant green. No one standing on it. Just geometry and grass.
+
+Ambient audio: Dew dripping from a leaf onto grass (close-mic'd, intimate). A flag rope tapping faintly against the pole.
+
+---
+
+[0:16–0:24] "Just grass. Air. And a quiet walk with people you care about."
+LANDSCAPE — THE COURSE AS CATHEDRAL
+
+Slow motorized dolly — moving forward at barely perceptible speed, maybe 2 inches per second. We are at eye height moving down the center of an empty fairway at dawn. Tree lines on both sides converge to a perfect vanishing point in the distance. The composition is Renaissance perspective — geometric, symmetrical, almost spiritual. The grass is striped, immaculate. Morning mist hangs at ankle height, glowing faintly where early light catches it. The sky is huge, taking up the top 60% of the 9:16 frame. Soft clouds, desaturated, barely there.
+
+This is the "cathedral shot" — the fairway as a place of worship. The scale should feel enormous. The silence should feel sacred.
+
+Hold for the full 8 seconds. The dolly movement is so slow the viewer almost isn't sure the camera is moving.
+
+Ambient audio: Wind through tall grass — gentle, sustained, like a long exhale. A sprinkler system clicking rhythmically somewhere far away, almost subliminal.
+
+---
+
+[0:24–0:30] "That's the game I fell in love with."
+THE DETAIL — TEXTURES OF THE COURSE
+
+Three intimate close-up shots, each 2 seconds long. No cuts to black between them — direct cuts, slightly faster rhythm than the previous section. These should feel like a quiet intake of breath.
+
+Shot 1: Extreme close-up of morning dew on a single blade of grass. The droplet catches light and refracts it softly. Shallow depth of field — everything behind the single blade dissolves into abstract green and cream bokeh. Almost macro photography.
+
+Shot 2: Close-up of a bunker edge — the clean geometric line where white sand meets manicured green grass. Shot from a low angle so the sand fills the bottom third, the grass fills the top third, and the horizon line between them cuts perfectly across the frame. Raked lines in the sand are visible. Orderly. Meditative.
+
+Shot 3: A golf ball sitting alone on a putting green, center frame. No tee, no club, no hand. Just the ball on the green with the gentle contour of the putting surface rolling away behind it into soft focus. The dimples on the ball catch directional morning light. The ball is the only sharp object — everything else falls away.
+
+Ambient audio: The sound of grass — almost like white noise but organic. A faint mechanical click of a sprinkler head turning.
+
+---
+
+[0:30–0:42] "So I made something for that version of golf. Clean. Simple. Nothing you'd ever have to explain."
+THE PRODUCT — SINGLE APPEARANCE
+
+This is the only moment the product appears in the entire video. It should feel like a discovery — like the course itself presented it.
+
+Shot 1 (6 seconds): Overhead shot, looking straight down. A single Fairway Rugby Polo Sweater in sage green, folded with quiet precision on a surface of dark walnut wood. The fold is clean and architectural — the collar visible, the ribbed hem tucked under, the cotton knit texture catching soft side-light that rakes across the surface and reveals the 7-gauge knit pattern, the subtle rugby stripe detail across the chest, the weight of the 100% cotton fabric. Nothing else in frame except the sweater and the wood grain. Negative space surrounds it — at least 40% of the frame is bare walnut surface. A single thin beam of natural morning light falls diagonally across one corner of the sweater.
+
+The color relationship should sing: sage green (#8B9D77) of the sweater against the warm tobacco brown of the walnut. These are brand colors in conversation. Barely perceptible 2mm push-in over the 6 seconds — the camera drifts closer so slowly the viewer feels drawn in rather than moved.
+
+Shot 2 (6 seconds): Same sweater, different angle. A straight-on eye-level shot of the sweater now draped over a minimal wooden valet stand or a single rounded wooden hanger, hanging against a raw linen (#E8E3DA) backdrop — a plain plaster wall or linen curtain. The sweater hangs with natural weight — not styled, not pinned, just gravity doing what gravity does to quality cotton knitwear. You can see the full silhouette: the polo collar, the slightly relaxed body, the ribbed cuffs and hem. The texture of the knit is visible — the way light catches the raised pattern and casts micro-shadows between the stitches.
+
+Rack focus: start with the background sharp and the sweater soft (0.5 seconds), then pull focus so the sweater snaps into crisp detail while the background melts away. Hold on the sharp sweater for the remaining 5.5 seconds.
+
+Ambient audio: Fabric sound — the faintest whisper of cotton settling. Almost imagined.
+
+---
+
+[0:42–0:55] "This is The Green Standard."
+RETURN TO THE COURSE — EXPANSIVE
+
+Shot 1 (6 seconds): Wide static frame. A par 3 hole from an elevated tee position, looking down at the green below. The entire hole is visible — tee box, carry over a gentle valley, the green nestled among mature trees. It's a painting. Early morning haze softens the distant tree line. The green is a perfect circle of manicured grass surrounded by rough and sand. The geometry of golf course design is beautiful from above. No one playing it. Just the architecture of the game resting in morning light.
+
+Shot 2 (7 seconds): The slowest shot in the entire video. A wide, locked-off frame of a putting green with a flagstick at center. The camera is at a distance — the green takes up maybe 30% of the frame, surrounded by fairway, rough, and tree line. Time passes. The only movement: the shadow of a cloud moving slowly across the landscape, shifting the light from warm to slightly cool and back to warm again over 7 seconds. The flag barely moves. The world is exhaling.
+
+This is the brand statement shot. It should feel like everything in the video has been building to this single, still, perfect view of what golf looks like when no one is watching.
+
+Ambient audio: Wind increases slightly — not dramatically, just present. Leaves rustling distantly. A bird call echoing once across the empty course.
+
+---
+
+[0:55–1:05] "Where peace meets the fairway."
+CLOSING — STILLNESS RETURNS
+
+Shot 1 (5 seconds): Return to the opening frame — or nearly identical. Ground level, edge of a fairway, dew-covered grass blades in sharp foreground, misty course stretching into distance behind. But the light has shifted: it's slightly warmer now, as if a few minutes have passed since the opening shot. The first rays of true sunrise are beginning to touch the tops of the distant trees. The mist is thinning. The day is arriving. Hold.
+
+Shot 2 (5 seconds): Final frame. The simplest composition in the video. A single fairway stretching away from us, perfectly centered, perfectly symmetrical. The vanishing point sits in the exact center of the 9:16 frame. The grass is striped. The sky is open. Nothing else. No flagstick, no tee markers, no bunkers visible — just an infinite green corridor leading somewhere quiet.
+
+Hold for 4 seconds. Then the image doesn't fade — it stays. A hard cut to solid black (#1A1A1A, the brand's dark color). Hold black for 1 full second of silence before the video ends.
+
+No logo. No text. No call to action. Just black. The brand name was in the voiceover. That's enough.
+
+Ambient audio: Fades to near-silence over the final 3 seconds. The last thing you hear is a single, distant bird.
+
+═══════════════════════════════════════════════════
+TECHNICAL SPECIFICATIONS
+═══════════════════════════════════════════════════
+
+Format: 9:16 vertical, 1080×1920
+Duration: 60–65 seconds total
+Framerate: 24fps (cinematic cadence)
+Resolution: Minimum 1080p, prefer 4K downscaled
+
+Camera behavior:
+— Tripod locked or motorized slider only
+— Maximum camera movement speed: 2 inches per second
+— No handheld. No shake. No breathing movement.
+— Dolly and push-in movements only. No pans, no tilts, no whips.
+
+Subjects:
+— ZERO humans in any shot. No figures, no silhouettes, no hands, no bodies.
+— One product appearance only (Sequence 5, shots 1 and 2). The product is the only man-made personal item in the entire video.
+— Golf course architecture (greens, fairways, bunkers, paths, flagsticks) treated as landscape, not sport.
+
+Color science:
+— Kodak Portra 400 film stock emulation
+— Primary palette: sage green (#8B9D77), warm stone (#B8B0A2), deep moss (#5C6B4F), raw linen (#E8E3DA), desert sand (#D4C5A9), charcoal (#2C2C2C)
+— Desaturated 15–20% from natural. No vibrance boost.
+— White balance: 5200K (slightly warm daylight)
+— Highlights: soft rolloff, never clipped
+— Shadows: lifted to 15–20 IRE, never pure black
+— No split-toning. No orange-and-teal. No LUT that announces itself.
+
+Grain and texture:
+— 35mm film grain, 15–20% opacity
+— Fine grain structure (Portra, not Tri-X)
+— Applied uniformly, not just in shadows
+
+Graphics and text:
+— None. Zero. No logo, no wordmark, no lower third, no end card.
+— The video contains only image and ambient sound + voiceover.
+
+Audio design:
+— Voiceover: ElevenLabs cloned voice, mixed at 100% (primary layer)
+— Ambient: real golf course field recording — birdsong, wind, grass, distant sprinklers, flag rope — mixed at 10–15% (atmospheric bed)
+— No music. No score. No lo-fi beats. Silence is the soundtrack.
+— Brief moments of pure silence between voiceover lines, letting the ambient bed breathe alone
+
+═══════════════════════════════════════════════════
+GENERATION NOTES FOR KLING V3-PRO
+═══════════════════════════════════════════════════
+
+Generate each sequence as individual 5–10 second clips. Chain using extend feature or assemble in CapCut.
+
+Priority order for generation (most critical shots first):
+1. Sequence 4 — Product shots (this must look flawless)
+2. Sequence 3 — Cathedral fairway dolly (hero landscape)
+3. Sequence 1 — Opening stillness (sets the entire tone)
+4. Sequence 5 — Par 3 and cloud shadow (emotional peak)
+5. Sequence 2 — Three architectural frames
+6. Sequence 6 — Closing mirror of opening
+
+For the product shots: use image-to-video if possible. Feed Kling a high-quality flat lay photograph of the actual Fairway Rugby Polo Sweater as the start frame, and prompt it to add subtle light movement and the rack focus pull. This produces far more realistic results than pure text-to-video for product close-ups.
+
+For landscape shots: text-to-video works well. Emphasize in each prompt: "no people, no animals, no figures visible anywhere in frame. Photorealistic. Shot on 35mm film. Dawn light. Mist."
+
+Avoid: any shot where Kling might default to adding a golfer, a person walking, or a hand entering frame. Re-roll any generation that includes human elements.
